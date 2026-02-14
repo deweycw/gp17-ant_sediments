@@ -1,0 +1,22 @@
+filename,station,depth_cm,r_factor,chi_sq,weight_sum,n_refs,components,Fe(III) oxyhydroxide,Fe(III) phyllosilicate,Fe(II) phyllosilicate,Fe(II) silicate,Fe sulfide,Fe(II) carbonate,Fe-Ti oxide,Fe(II) phosphate
+GP17_station15_19908_1cm_035_A_fl.avg.csv,GP17_station15_19908,1.0000,0.0194,0.0004,1.0148,3,"Hornblende, Biotite, Ferrosmectite",0.0000,0.9266,0.0000,0.0734,0.0000,0.0000,0.0000,0.0000
+GP17_station15_19908_3cm_036_A_fl.avg.csv,GP17_station15_19908,3.0000,0.0179,0.0003,1.0061,3,"Hornblende, Biotite, Ferrosmectite",0.0000,0.9435,0.0000,0.0565,0.0000,0.0000,0.0000,0.0000
+GP17_station15_19908_5cm_037_A_fl.avg.csv,GP17_station15_19908,5.0000,0.0208,0.0005,1.0048,2,"Hornblende, Ferrosmectite",0.0000,0.7362,0.0000,0.2638,0.0000,0.0000,0.0000,0.0000
+GP17_station15_19908_7cm_038_A_fl.avg.csv,GP17_station15_19908,7.0000,0.0227,0.0006,1.0120,3,"Hornblende, Biotite, Ferrosmectite",0.0000,0.7413,0.0000,0.2587,0.0000,0.0000,0.0000,0.0000
+GP17_station15_19908_9cm_040_A_fl.avg.csv,GP17_station15_19908,9.0000,0.0218,0.0005,1.0052,3,"Hornblende, Biotite, Ferrosmectite",0.0000,0.6477,0.0000,0.3523,0.0000,0.0000,0.0000,0.0000
+GP17_station15_19908_11cm_041_A_fl.avg.csv,GP17_station15_19908,11.0000,0.0196,0.0004,1.0113,3,"Hornblende, Biotite, Ferrosmectite",0.0000,0.7173,0.0000,0.2827,0.0000,0.0000,0.0000,0.0000
+GP17_station15_19908_15cm_042_A_fl.avg.csv,GP17_station15_19908,15.0000,0.0239,0.0006,1.0043,2,"Hornblende, Ferrosmectite",0.0000,0.6700,0.0000,0.3300,0.0000,0.0000,0.0000,0.0000
+GP17_station27_20892_1cm_025_A_fl.avg.csv,GP17_station27_20892,1.0000,0.0157,0.0002,1.0096,4,"Hornblende, Biotite, 6L-Fhy, Ferrosmectite",0.0405,0.8286,0.0000,0.1309,0.0000,0.0000,0.0000,0.0000
+GP17_station27_20892_3cm_026_A_fl.avg.csv,GP17_station27_20892,3.0000,0.0155,0.0003,1.0055,3,"Hornblende, Biotite, Ferrosmectite",0.0000,0.8565,0.0000,0.1435,0.0000,0.0000,0.0000,0.0000
+GP17_station27_20892_5cm_027_A_fl.avg.csv,GP17_station27_20892,5.0000,0.0163,0.0003,0.9936,2,"Hornblende, Ferrosmectite",0.0000,0.8610,0.0000,0.1390,0.0000,0.0000,0.0000,0.0000
+GP17_station27_20892_7cm_028_A_fl.avg.csv,GP17_station27_20892,7.0000,0.0156,0.0002,0.9935,3,"Hornblende, Biotite, Ferrosmectite",0.0000,0.8636,0.0000,0.1364,0.0000,0.0000,0.0000,0.0000
+GP17_station27_20892_9cm_031_A_fl.avg.csv,GP17_station27_20892,9.0000,0.0154,0.0003,1.0017,2,"Hornblende, Ferrosmectite",0.0000,0.8691,0.0000,0.1309,0.0000,0.0000,0.0000,0.0000
+GP17_station27_20892_11cm_032_A_fl.avg.csv,GP17_station27_20892,11.0000,0.0160,0.0003,0.9917,2,"Hornblende, Ferrosmectite",0.0000,0.8774,0.0000,0.1226,0.0000,0.0000,0.0000,0.0000
+GP17_station27_20892_15cm_033_A_fl.avg.csv,GP17_station27_20892,15.0000,0.0160,0.0003,1.0063,2,"Hornblende, Ferrosmectite",0.0000,0.8937,0.0000,0.1063,0.0000,0.0000,0.0000,0.0000
+GP17_station5_19119_1cm_015_A_fl.avg.csv,GP17_station5_19119,1.0000,0.0202,0.0004,0.9987,4,"Hornblende, Biotite, 6L-Fhy, Ferrosmectite",0.0253,0.7727,0.0000,0.2020,0.0000,0.0000,0.0000,0.0000
+GP17_station5_19119_3cm_016_A_fl.avg.csv,GP17_station5_19119,3.0000,0.0212,0.0005,1.0125,3,"Hornblende, 6L-Fhy, Ferrosmectite",0.0067,0.8453,0.0000,0.1480,0.0000,0.0000,0.0000,0.0000
+GP17_station5_19119_5cm_017_A_fl.avg.csv,GP17_station5_19119,5.0000,0.0220,0.0005,1.0075,3,"Hornblende, Biotite, Ferrosmectite",0.0000,0.8977,0.0000,0.1023,0.0000,0.0000,0.0000,0.0000
+GP17_station5_19119_7cm_018_A_fl.avg.csv,GP17_station5_19119,7.0000,0.0225,0.0005,1.0120,2,"Hornblende, Ferrosmectite",0.0000,0.8981,0.0000,0.1019,0.0000,0.0000,0.0000,0.0000
+GP17_station5_19119_9cm_021_A_fl.avg.csv,GP17_station5_19119,9.0000,0.0206,0.0004,1.0091,2,"Hornblende, Ferrosmectite",0.0000,0.8746,0.0000,0.1254,0.0000,0.0000,0.0000,0.0000
+GP17_station5_19119_11cm_022_A_fl.avg.csv,GP17_station5_19119,11.0000,0.0193,0.0004,1.0007,2,"Hornblende, Ferrosmectite",0.0000,0.8803,0.0000,0.1197,0.0000,0.0000,0.0000,0.0000
+GP17_station5_19119_15cm_023_A_fl.avg.csv,GP17_station5_19119,15.0000,0.0213,0.0005,1.0051,2,"Hornblende, Ferrosmectite",0.0000,0.9006,0.0000,0.0994,0.0000,0.0000,0.0000,0.0000
