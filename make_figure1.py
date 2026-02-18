@@ -1,7 +1,8 @@
 """
-Figure 1: XFM Maps 2x2 panel with shared legend strip.
-Renders µ-XRF tricolor maps from HDF5 files with cluster-assigned point
-symbols, and labels the 6 representative spectra shown in Figure 2.
+Figure 1: XFM tricolor maps (2×2 panel) for Maps 6, 9, 10, 11.
+RGB = Fe (red), K (green), Ca (blue).
+All XANES locations shown as white circles; selected spectra annotated
+with Figure 2 panel labels.
 """
 import numpy as np
 import pandas as pd
@@ -24,80 +25,28 @@ OUT_DIR = Path(".")
 
 # Panel definitions: key -> (h5 filename, scale bar mm)
 PANEL_FILES = {
-    "a": ("2x2_10um_striated_gt15_2_001.h5",   0.5),
-    "b": ("2x2_10um_rectangles_gt15_1_001.h5",  0.5),
-    "c": ("2x2_10um_flaky_nodule_001.h5",       0.5),
-    "d": ("1x1_10um_flaky_dark_gt15_001.h5",    0.2),
+    "a": ("2x2_10um_flaky_2_001.h5",            0.5),   # Map 7
+    "b": ("2x2_10um_flaky_smooth_2_001.h5",     0.5),   # Map 9
+    "c": ("2x2_10um_rectangles_gt15_1_001.h5",  0.5),   # Map 10
+    "d": ("2x2_10um_striated_gt15_2_001.h5",    0.5),   # Map 11
 }
+PANEL_MAP_LABELS = {"a": "Map 7", "b": "Map 9", "c": "Map 10", "d": "Map 11"}
 
 # RGB channel ROI names
-R_ROI, G_ROI, B_ROI = "Fe Ka", "Ca Ka", "K Ka"
+R_ROI, G_ROI, B_ROI = "Fe Ka", "K Ka", "Ca Ka"
 
-# Cluster styles
-CLUSTER_STYLE = {
-    1:    {"marker": "o", "label": "Group 1"},
-    2:    {"marker": "s", "label": "Group 2"},
-    "3a": {"marker": "^", "label": "Group 3a"},
-    "3b": {"marker": "v", "label": "Group 3b"},
-    4:    {"marker": "D", "label": "Group 4"},
-    5:    {"marker": "p", "label": "Group 5"},
+# Spectrum prefixes that belong to each panel (for Figure 2 cross-ref)
+PANEL_PREFIXES = {
+    "a": ["FeXANES_GT5_flaky2_FeXRD_", "FeXANES_GT5_flaky2_Fe_"],
+    "b": ["FeXANES_GT5_flakysmooth2_Fe_"],
+    "c": ["FeXANES_GT15_rectangles_Fe_", "FeXANES_GT15_Fe_"],
+    "d": ["FeXANES_GT15_FeTiXRD_striated2_", "FeXANES_GT15_Fe_striated2_"],
 }
 
-# Phase grouping: mineral name -> phase group label
-PHASE_GROUPS = {
-    "6L-Fhy": "Fe(III) oxyhydroxide", "2L-Fhy": "Fe(III) oxyhydroxide",
-    "2L-Fhy on sand": "Fe(III) oxyhydroxide", "Goethite": "Fe(III) oxyhydroxide",
-    "Goethite on sand": "Fe(III) oxyhydroxide", "Lepidocrocite": "Fe(III) oxyhydroxide",
-    "Schwertmannite": "Fe(III) oxyhydroxide",
-    "Hematite": "Fe(III) oxide", "Hematite on sand": "Fe(III) oxide",
-    "Maghemite": "Fe(III) oxide",
-    "Ferrosmectite": "Fe(III) phyllosilicate", "Nontronite": "Fe(III) phyllosilicate",
-    "Biotite": "Fe(II) phyllosilicate",
-    "Hornblende": "Fe(II) silicate", "Augite": "Fe(II) silicate",
-    "Mackinawite (aged)": "Fe sulfide", "Mackinawite": "Fe sulfide",
-    "Pyrrhotite": "Fe sulfide", "Pyrite": "Fe sulfide", "FeS": "Fe sulfide",
-    "Siderite-s": "Fe(II) carbonate", "Siderite-n": "Fe(II) carbonate",
-    "Ilmenite": "Fe-Ti oxide",
-    "Vivianite": "Fe(II) phosphate",
-    "Jarosite": "Fe(III) sulfate",
-    "Green Rust - Carbonate": "Green rust", "Green Rust - Chloride": "Green rust",
-    "Green Rust - Sulfate": "Green rust",
-}
-
-# Base group definitions (labels will be filled from LCF results)
-GROUPS = [
-    {"key": "1",  "marker": "o"},
-    {"key": "2",  "marker": "s"},
-    {"key": "3a", "marker": "^"},
-    {"key": "3b", "marker": "v"},
-    {"key": "4",  "marker": "D"},
-    {"key": "5",  "marker": "p"},
-]
-
-# Selected spectra from Figure 2 (group -> spectrum name)
-SELECTED_SPECTRA = {
-    1:    "FeXANES_GT15_rectangles_Fe_6.001",
-    2:    "FeXANES_GT5_flaky_nodule_Fe_8.001",
-    "3a": "FeXANES_GT15_rectangles_Fe_3.001",
-    "3b": "FeXANES_GT15_flakydark_Fe_1.001",
-    4:    "FeXANES_GT15_FeTiXRD_striated2_2.001",
-    5:    "FeXANES_GT5_flaky_nodule_Fe_10.001",
-}
-
-# Figure 2 panel labels for annotation
-FIG2_PANEL = {
-    1:    "2a",
-    2:    "2b",
-    "3a": "2c",
-    "3b": "2d",
-    4:    "2e",
-    5:    "2f",
-}
-
-
-# ---------- HDF5 helpers (from notebook) ----------
+# ---------- HDF5 helpers ----------
 def area_to_spectrum(area_name):
     return f"FeXANES_{area_name}.001"
+
 
 def get_roi_map(f, roi_name):
     for path in ["xrmmap/roimap/sum_cor", "xrmmap/roimap/sum_raw"]:
@@ -109,9 +58,15 @@ def get_roi_map(f, roi_name):
                 return f[path][:, 1:-1, idx].astype(float)
     return None
 
-def make_rgb(f):
+
+GREEN_THRESHOLD = 0.15  # zero out green below this normalized intensity
+GREEN_SCALE = 0.8       # scale down green brightness
+
+
+def make_rgb(f, green_target=None):
     channels = []
-    for name in [R_ROI, G_ROI, B_ROI]:
+    green_mean = None
+    for i, name in enumerate([R_ROI, G_ROI, B_ROI]):
         ch = get_roi_map(f, name)
         if ch is None:
             ch = np.zeros((1, 1))
@@ -121,8 +76,18 @@ def make_rgb(f):
             ch = np.clip((ch - vmin) / (vmax - vmin), 0, 1)
         else:
             ch = np.zeros_like(ch)
+        if i == 1:  # green channel
+            ch[ch < GREEN_THRESHOLD] = 0
+            nonzero = ch[ch > 0]
+            if len(nonzero) > 0:
+                green_mean = nonzero.mean()
+                if green_target is not None and green_mean > 0:
+                    ch[ch > 0] *= (green_target / green_mean)
+                    ch = np.clip(ch, 0, 1)
+            ch = ch * GREEN_SCALE
         channels.append(ch)
-    return np.stack(channels, axis=-1)
+    return np.stack(channels, axis=-1), green_mean
+
 
 def get_area_centroids(f):
     centroids = {}
@@ -149,138 +114,148 @@ pc_cols = [c for c in cluster_df.columns if c.startswith("PC")]
 km = KMeans(n_clusters=2, random_state=42, n_init=10)
 c3_labels = km.fit_predict(c3_df[pc_cols].values)
 
-# Determine 3a vs 3b: need LCF data to check pyrrhotite content
 lcf_df = pd.read_csv(PCA_DIR / "lcf_individual.csv")
 c3_lcf = lcf_df[lcf_df["cluster"] == 3].copy()
 c3_lcf["sub_label"] = c3_labels
 sub0_pyrr = c3_lcf[c3_lcf["sub_label"] == 0]["Pyrrhotite"].mean()
 sub1_pyrr = c3_lcf[c3_lcf["sub_label"] == 1]["Pyrrhotite"].mean()
-if sub0_pyrr >= sub1_pyrr:
-    label_map = {0: "3a", 1: "3b"}
-else:
-    label_map = {1: "3a", 0: "3b"}
+label_map = {0: "3a", 1: "3b"} if sub0_pyrr >= sub1_pyrr else {1: "3a", 0: "3b"}
 
 sub3_lookup = {}
 for i, (_, row) in enumerate(c3_df.iterrows()):
     sub3_lookup[row["spectrum"]] = label_map[c3_labels[i]]
+
 
 def get_style_key(spec_name, cluster_id):
     if cluster_id == 3:
         return sub3_lookup.get(spec_name, "3a")
     return cluster_id
 
-# Build reverse lookup: spectrum -> group key
+
+# Build spectrum -> group key lookup
 spec_to_group = {}
 for _, row in cluster_df.iterrows():
     spec_to_group[row["spectrum"]] = get_style_key(row["spectrum"], row["cluster"])
 
-# Build set of selected area names for quick lookup
-selected_areas = {}  # area_name -> group key
+# ---------- Select representative spectra for Figure 2 ----------
+# Pick one spectrum per group, spreading across panels so each panel
+# has at least one selected point.
+print("Selecting representative spectra for Figure 2...")
+
+# Assign each group to a preferred panel to ensure coverage
+# (a) Map 7:  Groups 1, 2, 3b, 4, 5
+# (b) Map 9:  Groups 1, 3a, 3b, 4, 5
+# (c) Map 10: Groups 1, 3a, 4, 5
+# (d) Map 11: Groups 3a, 4, 5
+GROUP_PANEL = {1: "c", 2: "a", "3a": "b", "3b": "a", 4: "d", 5: "b"}
+
+GROUP_ORDER = [1, 2, "3a", "3b", 4, 5]
+SELECTED_SPECTRA = {}  # group_key -> spectrum name
+
+for grp in GROUP_ORDER:
+    panel = GROUP_PANEL[grp]
+    prefixes = PANEL_PREFIXES[panel]
+
+    # Filter to spectra from the assigned panel
+    candidates = lcf_df[lcf_df["spectrum"].apply(
+        lambda s, px=prefixes: any(s.startswith(p) for p in px))].copy()
+    candidates["group"] = candidates["spectrum"].map(spec_to_group)
+    candidates = candidates[candidates["group"] == grp]
+
+    if candidates.empty:
+        print(f"  Group {grp}: NO CANDIDATES in panel ({panel})")
+        continue
+
+    # Prefer 3+ component fits with good R-factor
+    multi = candidates[candidates["n_refs"] >= 3]
+    if len(multi) >= 1:
+        candidates = multi
+    good = candidates[candidates["r_factor"] <= 0.025]
+    if len(good) >= 1:
+        candidates = good
+
+    # Pick closest to median R-factor
+    median_r = candidates["r_factor"].median()
+    idx = (candidates["r_factor"] - median_r).abs().idxmin()
+    row = candidates.loc[idx]
+    SELECTED_SPECTRA[grp] = row["spectrum"]
+    print(f"  Group {grp}: {row['spectrum']} (R={row['r_factor']:.4f}) — panel ({panel})")
+
+# Figure 2 panel labels for annotation
+FIG2_PANEL = {}
+for i, grp in enumerate(GROUP_ORDER):
+    if grp in SELECTED_SPECTRA:
+        FIG2_PANEL[grp] = f"2{chr(ord('a') + i)}"
+
+# Build reverse lookup: area_name -> group key (for selected spectra only)
+selected_areas = {}
 for grp, spec_name in SELECTED_SPECTRA.items():
     area_name = spec_name.replace("FeXANES_", "").replace(".001", "")
     selected_areas[area_name] = grp
 
-# ---------- Build legend labels from individual LCF results ----------
-# Get reference mineral columns from lcf_df
-ref_columns = [c for c in lcf_df.columns if c not in
-               ["spectrum", "cluster", "r_factor", "chi_sq", "weight_sum", "n_refs"]]
 
-for grp_info in GROUPS:
-    grp_key = grp_info["key"]
-    # Map string keys to the right type for SELECTED_SPECTRA lookup
-    if grp_key in SELECTED_SPECTRA:
-        sk = grp_key
-    elif grp_key.isdigit() and int(grp_key) in SELECTED_SPECTRA:
-        sk = int(grp_key)
-    else:
-        grp_info["label"] = ""
-        continue
+# ---------- Scale bar helper ----------
+def find_clear_corner(extent, all_points, bar_length_mm):
+    """Find a corner that doesn't overlap with XANES points."""
+    x_range = extent[1] - extent[0]
+    y_range = extent[3] - extent[2]
+    bar_frac = bar_length_mm / x_range
+    mx = x_range * 0.05
+    my = y_range * 0.08
 
-    spec_name = SELECTED_SPECTRA[sk]
-    row = lcf_df[lcf_df["spectrum"] == spec_name]
-    if row.empty:
-        grp_info["label"] = ""
-        continue
-    row = row.iloc[0]
-    weight_sum = row["weight_sum"]
-
-    # Aggregate mineral weights into phase groups
-    phase_pcts = {}
-    for ref_name in ref_columns:
-        w = row[ref_name]
-        if w > 0.005:
-            pg = PHASE_GROUPS.get(ref_name, ref_name)
-            pct = w / weight_sum * 100 if weight_sum > 0 else 0
-            phase_pcts[pg] = phase_pcts.get(pg, 0) + pct
-
-    # Sort by descending percentage
-    sorted_phases = sorted(phase_pcts.items(), key=lambda x: x[1], reverse=True)
-    parts = [f"{name} {pct:.0f}%" for name, pct in sorted_phases if pct >= 1]
-    grp_info["label"] = ", ".join(parts)
-
-print("Legend labels (from individual LCF):")
-for g in GROUPS:
-    print(f"  Group {g['key']}: {g['label']}")
+    # top-left excluded: reserved for panel label
+    corners = [
+        ("bottom-left",  bar_frac + 0.03, 0.05),
+        ("bottom-right", 0.97, 0.05),
+        ("top-right",    0.97, 0.93),
+    ]
+    for name, x_end_frac, y_frac in corners:
+        x_start_data = extent[0] + (x_end_frac - bar_frac) * x_range
+        x_end_data = extent[0] + x_end_frac * x_range
+        y_data = extent[2] + y_frac * y_range
+        conflict = False
+        for px, py in all_points:
+            if (x_start_data - mx <= px <= x_end_data + mx and
+                    y_data - my <= py <= y_data + my):
+                conflict = True
+                break
+        if not conflict:
+            return x_end_frac, y_frac, name
+    return 0.97, 0.05, "bottom-right"
 
 
-# ---------- RGB triangle helper ----------
-def make_rgb_triangle(ax):
-    """Draw Fe(red)-K(blue)-Ca(green) tricolor triangle."""
-    top_left = np.array([0.2, 0.95])
-    top_right = np.array([0.8, 0.95])
-    bottom = np.array([0.5, 0.95 - 0.6 * np.sqrt(3) / 2])
-
-    n = 200
-    tri_img = np.ones((n, n, 3))
-    for iy in range(n):
-        for ix in range(n):
-            px = ix / (n - 1)
-            py = 1.0 - iy / (n - 1)
-            p = np.array([px, py])
-            v0 = top_right - top_left
-            v1 = bottom - top_left
-            v2 = p - top_left
-            d00 = np.dot(v0, v0)
-            d01 = np.dot(v0, v1)
-            d11 = np.dot(v1, v1)
-            d20 = np.dot(v2, v0)
-            d21 = np.dot(v2, v1)
-            denom = d00 * d11 - d01 * d01
-            if abs(denom) < 1e-10:
-                continue
-            v = (d11 * d20 - d01 * d21) / denom
-            w = (d00 * d21 - d01 * d20) / denom
-            u = 1.0 - v - w
-            if u >= -0.01 and v >= -0.01 and w >= -0.01:
-                u = max(u, 0); v = max(v, 0); w = max(w, 0)
-                s = u + v + w
-                if s > 0:
-                    u /= s; v /= s; w /= s
-                tri_img[iy, ix] = [u, w, v]
-            else:
-                tri_img[iy, ix] = [1, 1, 1]
-
-    ax.imshow(tri_img, extent=[0, 1, 0, 1], aspect='auto')
-    tri_coords = [top_left, top_right, bottom, top_left]
-    ax.plot([c[0] for c in tri_coords], [c[1] for c in tri_coords], 'k-', lw=1.0)
-    ax.text(top_left[0] - 0.03, top_left[1] + 0.03, "Fe", fontsize=8,
-            fontweight='bold', color='red', ha='center', va='bottom')
-    ax.text(top_right[0] + 0.03, top_right[1] + 0.03, "K", fontsize=8,
-            fontweight='bold', color='blue', ha='center', va='bottom')
-    ax.text(bottom[0], bottom[1] - 0.05, "Ca", fontsize=8,
-            fontweight='bold', color='green', ha='center', va='top')
-    ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.axis('off')
+# Tricolor legend location opposite to scale bar
+_LEGEND_LOC = {
+    "bottom-right": "upper left",
+    "bottom-left":  "upper right",
+    "top-right":    "lower left",
+    "top-left":     "lower right",
+}
 
 
 # ---------- Render each panel ----------
 print("Rendering maps from HDF5...")
 
-panel_data = {}  # key -> (rgb, extent, style_points, selected_points, bar_mm)
+# Pass 1: compute green channel means for each map
+green_means = {}
+for panel_key, (h5_name, bar_mm) in PANEL_FILES.items():
+    h5_path = MAP_DIR / h5_name
+    with h5py.File(h5_path, "r") as f:
+        _, gm = make_rgb(f, green_target=None)
+    green_means[panel_key] = gm
+    print(f"  Panel ({panel_key}) green mean: {gm:.3f}" if gm else
+          f"  Panel ({panel_key}) green mean: N/A")
+
+green_target = np.median([v for v in green_means.values() if v is not None])
+print(f"  Green target (median): {green_target:.3f}")
+
+# Pass 2: render with equalized green
+panel_data = {}  # key -> (rgb, extent, all_points, sel_points, bar_mm)
 
 for panel_key, (h5_name, bar_mm) in PANEL_FILES.items():
     h5_path = MAP_DIR / h5_name
     with h5py.File(h5_path, "r") as f:
-        rgb = make_rgb(f)
+        rgb, _ = make_rgb(f, green_target=green_target)
         centroids = get_area_centroids(f)
         pos = f["xrmmap/positions/pos"]
         ny, nx_full = pos.shape[:2]
@@ -290,55 +265,51 @@ for panel_key, (h5_name, bar_mm) in PANEL_FILES.items():
         extent = [float(x_pos.min()), float(x_pos.max()),
                   float(y_pos.min()), float(y_pos.max())]
 
-    # Map centroids to display coordinates, tracking selected spectra
-    style_points = {k: ([], []) for k in CLUSTER_STYLE}
-    sel_points = []  # list of (x_disp, y_disp, group_key) for selected spectra
+    # Map centroids to display coordinates
+    all_points = []   # (x, y) for all XANES points
+    sel_points = []   # (x, y, group_key) for selected spectra
 
     for area_name, (row_c, col_c) in centroids.items():
         spec_name = area_to_spectrum(area_name)
         cluster_id = cluster_lookup.get(spec_name)
         if cluster_id is None:
             continue
-        sk = get_style_key(spec_name, cluster_id)
-        if sk not in style_points:
-            continue
         col_adj = col_c - 1
         if col_adj < 0 or col_adj >= nx:
             continue
         x_disp = np.interp(col_adj, [0, nx - 1], [extent[0], extent[1]])
         y_disp = np.interp(row_c, [0, ny - 1], [extent[2], extent[3]])
-        style_points[sk][0].append(x_disp)
-        style_points[sk][1].append(y_disp)
+        all_points.append((x_disp, y_disp))
 
-        # Check if this is a selected spectrum
         if area_name in selected_areas:
             sel_points.append((x_disp, y_disp, selected_areas[area_name]))
 
-    panel_data[panel_key] = (rgb, extent, style_points, sel_points, bar_mm)
-    print(f"  Panel ({panel_key}): {rgb.shape[1]}x{rgb.shape[0]}, "
-          f"{sum(len(v[0]) for v in style_points.values())} points, "
-          f"{len(sel_points)} selected")
+    panel_data[panel_key] = (rgb, extent, all_points, sel_points, bar_mm)
+    print(f"  Panel ({panel_key}) {PANEL_MAP_LABELS[panel_key]}: "
+          f"{rgb.shape[1]}x{rgb.shape[0]}, "
+          f"{len(all_points)} XANES points, {len(sel_points)} selected")
 
 
 # ---------- Build the figure ----------
 print("Assembling figure...")
 
 fig_w = TARGET_WIDTH_IN
-panel_w_in = fig_w / 2.06  # slight margin
-# Use aspect of first panel
+panel_w_in = fig_w / 2.06
 aspect = panel_data["a"][0].shape[0] / panel_data["a"][0].shape[1]
 panel_h_in = panel_w_in * aspect
-gap = 0.04  # inches between panels
-legend_h_in = 1.8
-total_h_in = 2 * panel_h_in + gap + legend_h_in + 0.15
+gap = 0.04
+legend_h_in = 0.4
+total_h_in = 2 * panel_h_in + gap + legend_h_in + 0.1
 
 fig = plt.figure(figsize=(fig_w, total_h_in), dpi=DPI)
+
 
 def to_fig(x, y, w, h):
     return [x / fig_w, y / total_h_in, w / fig_w, h / total_h_in]
 
+
 x_start = (fig_w - 2 * panel_w_in - gap) / 2
-y_grid_bottom = legend_h_in + 0.15
+y_grid_bottom = legend_h_in + 0.05
 
 panel_layout = [["a", "b"], ["c", "d"]]
 panel_labels = {"a": "(a)", "b": "(b)", "c": "(c)", "d": "(d)"}
@@ -352,21 +323,20 @@ for row_idx, row_keys in enumerate(panel_layout):
         ax = fig.add_axes(rect)
         panel_axes[key] = ax
 
-        rgb, extent, style_points, sel_points, bar_mm = panel_data[key]
+        rgb, extent, all_points, sel_points, bar_mm = panel_data[key]
 
         ax.imshow(rgb, extent=extent, aspect="equal", interpolation="nearest",
                   origin="lower")
 
-        # Plot all cluster symbols
-        for sk, style in CLUSTER_STYLE.items():
-            xs, ys = style_points[sk]
-            if xs:
-                ax.scatter(xs, ys, marker=style["marker"], facecolors="none",
-                           edgecolors="white", s=80, linewidths=1.0, zorder=5)
-
-        # Label selected spectra with Figure 2 panel reference
+        # Plot only selected XANES locations and label with Figure 2 ref
         for x_disp, y_disp, grp in sel_points:
-            fig2_label = FIG2_PANEL[grp]
+            ax.scatter(x_disp, y_disp, marker="o", facecolors="none",
+                       edgecolors="white", s=80, linewidths=1.0, zorder=5)
+
+        for x_disp, y_disp, grp in sel_points:
+            fig2_label = FIG2_PANEL.get(grp)
+            if fig2_label is None:
+                continue
             ax.annotate(
                 fig2_label,
                 xy=(x_disp, y_disp),
@@ -380,64 +350,63 @@ for row_idx, row_keys in enumerate(panel_layout):
                 zorder=10,
             )
 
-        # Panel label
-        ax.text(0.04, 0.96, panel_labels[key], transform=ax.transAxes,
-                fontsize=11, fontweight='bold', color='white', va='top', ha='left',
-                bbox=dict(boxstyle='round,pad=0.15', facecolor='black',
-                          alpha=0.5, edgecolor='none'))
+        # Panel label + map label
+        ax.text(0.04, 0.96, panel_labels[key],
+                transform=ax.transAxes,
+                fontsize=9, fontweight="bold", color="white", va="top", ha="left",
+                bbox=dict(boxstyle="round,pad=0.15", facecolor="black",
+                          alpha=0.5, edgecolor="none"))
 
-        # Scale bar (inside plot, bottom left, white on dark background)
+        # Scale bar
         x_range = extent[1] - extent[0]
         bar_frac = bar_mm / x_range
-        x_sb = 0.03
-        x_end = x_sb + bar_frac
-        y_sb = 0.04
-        ax.plot([x_sb, x_end], [y_sb, y_sb], color="white", linewidth=3,
-                solid_capstyle="butt", zorder=10, clip_on=False,
+        bar_x_end, bar_y, bar_corner = find_clear_corner(
+            extent, all_points, bar_mm)
+        bar_x_start = bar_x_end - bar_frac
+        ax.plot([bar_x_start, bar_x_end], [bar_y, bar_y], color="white",
+                linewidth=3, solid_capstyle="butt", zorder=10, clip_on=False,
                 transform=ax.transAxes)
+        if "bottom" in bar_corner:
+            text_y = bar_y + 0.03
+            va = "bottom"
+        else:
+            text_y = bar_y - 0.03
+            va = "top"
         label = f"{bar_mm:.1f} mm" if bar_mm < 1 else f"{bar_mm:.0f} mm"
-        ax.text((x_sb + x_end) / 2, y_sb + 0.03, label, color="white",
-                fontsize=7, ha="center", va="bottom", fontweight="bold",
+        ax.text((bar_x_start + bar_x_end) / 2, text_y, label, color="white",
+                fontsize=7, ha="center", va=va, fontweight="bold",
                 zorder=10, clip_on=False, transform=ax.transAxes)
 
-        ax.set_xticks([]); ax.set_yticks([])
+        ax.set_xticks([])
+        ax.set_yticks([])
 
-# ---------- Legend strip ----------
-legend_y = 0.0
-legend_x = x_start
-
-# RGB triangle (left side, vertically centered)
-tri_w_in = 1.0
-tri_h_in = 1.0
-tri_y = legend_y + (legend_h_in - tri_h_in) / 2
-ax_tri = fig.add_axes(to_fig(legend_x, tri_y, tri_w_in, tri_h_in))
-make_rgb_triangle(ax_tri)
-
-# Group legend: single column of 6 entries, using width to the right of triangle
-legend_start_x = legend_x + tri_w_in + 0.08
-entry_w = fig_w - legend_start_x - 0.05
-entry_h = legend_h_in / 6
-
-for i, grp in enumerate(GROUPS):
-    x = legend_start_x
-    y = legend_y + legend_h_in - (i + 1) * entry_h
-    rect = to_fig(x, y, entry_w, entry_h)
-    ax_entry = fig.add_axes(rect)
-    ax_entry.axis('off')
-
-    # Marker + group name on one line, composition after
-    ax_entry.scatter([0.02], [0.5], marker=grp["marker"], s=50,
-                     facecolors='none', edgecolors='black', linewidths=1.0,
-                     transform=ax_entry.transAxes, clip_on=False, zorder=5)
-    ax_entry.text(0.05, 0.5,
-                  f"Group {grp['key']}:  {grp['label']}",
-                  transform=ax_entry.transAxes, fontsize=5.5,
-                  va='center', ha='left')
+# ---------- Shared tricolor legend below panels ----------
+tri_handles = [
+    Line2D([0], [0], marker="s", color="none",
+           markerfacecolor="red", markersize=8, label="Fe K\u03b1"),
+    Line2D([0], [0], marker="s", color="none",
+           markerfacecolor="lime", markersize=8, label="K K\u03b1"),
+    Line2D([0], [0], marker="s", color="none",
+           markerfacecolor="blue", markersize=8, label="Ca K\u03b1"),
+]
+fig.legend(handles=tri_handles, loc="lower center",
+           ncol=3, fontsize=8, frameon=True, fancybox=False,
+           edgecolor="gray", facecolor="black", labelcolor="white",
+           handletextpad=0.3, columnspacing=1.5, borderpad=0.4,
+           bbox_to_anchor=(0.5, 0.005))
 
 # Save
 fig.savefig(OUT_DIR / "figure_xfm_maps.png", dpi=DPI,
-            bbox_inches='tight', facecolor='white', pad_inches=0.05)
+            bbox_inches="tight", facecolor="white", pad_inches=0.05)
 fig.savefig(OUT_DIR / "figure_xfm_maps.pdf", dpi=DPI,
-            bbox_inches='tight', facecolor='white', pad_inches=0.05)
+            bbox_inches="tight", facecolor="white", pad_inches=0.05)
 plt.close(fig)
 print("Figure 1 saved: figure_xfm_maps.png and .pdf")
+
+# Print selected spectra for Figure 2 reference
+print("\nSelected spectra for Figure 2:")
+for grp in GROUP_ORDER:
+    if grp in SELECTED_SPECTRA:
+        spec = SELECTED_SPECTRA[grp]
+        panel = FIG2_PANEL[grp]
+        print(f"  Fig. {panel} — Group {grp}: {spec}")

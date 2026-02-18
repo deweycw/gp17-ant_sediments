@@ -34,6 +34,29 @@ FIG1_MAPS = {
     "flaky_dark_gt15":    "1x1_10um_flaky_dark_gt15_001.h5",
 }
 
+# Map labels: filename stem → display label (consistent across all figures)
+MAP_LABELS = {
+    "1x1_10um_flaky_dark_gt15_001": "Map 1",
+    "1x1_10um_flaky_gray_mix_gt15_001": "Map 2",
+    "1x1_10um_rectangles_flakes_gt15_2_001": "Map 3",
+    "2x2_10um_concentric_gray_1_001": "Map 4",
+    "2x2_10um_concentric_gray_3_001": "Map 5",
+    "2x2_10um_flaky_1_001": "Map 6",
+    "2x2_10um_flaky_2_001": "Map 7",
+    "2x2_10um_flaky_nodule_001": "Map 8",
+    "2x2_10um_flaky_smooth_2_001": "Map 9",
+    "2x2_10um_rectangles_gt15_1_001": "Map 10",
+    "2x2_10um_striated_gt15_2_001": "Map 11",
+    "2x2_10um_super_dark_gt15_4_001": "Map 12",
+    "2x2_10um_white_band_001": "Map 13",
+}
+
+# Reverse lookup: FIG1_MAPS short key → Map label
+_FIG1_LABELS = {}
+for _k, _v in FIG1_MAPS.items():
+    _stem = _v.replace(".h5", "")
+    _FIG1_LABELS[_k] = MAP_LABELS.get(_stem, _k)
+
 # Cluster colors and styles
 CLUSTER_COLORS = {1: '#1f77b4', 2: '#ff7f0e', 3: '#2ca02c', 4: '#d62728', 5: '#9467bd'}
 CLUSTER_LABELS = {1: 'Grp 1', 2: 'Grp 2', 3: 'Grp 3', 4: 'Grp 4', 5: 'Grp 5'}
@@ -92,7 +115,7 @@ if len(c3_df) > 1:
 # ==========================================================
 print("Extracting element maps from all HDF5 files...")
 
-all_h5 = sorted([p for p in MAP_DIR.glob("*.h5") if "test_map" not in p.name])
+all_h5 = sorted([p for p in MAP_DIR.glob("*.h5") if "test_map" not in p.name and "elongated_particle" not in p.name])
 all_point_data = []  # per-XANES-point element intensities
 
 for h5_path in all_h5:
@@ -357,8 +380,8 @@ for col_idx, (map_label, h5_name) in enumerate(FIG1_MAPS.items()):
                   norm=LogNorm(), rasterized=True)
 
         r, _ = pearsonr(fe[mask], other[mask])
-        short_label = map_label.replace("_gt15", "").replace("_", " ")
-        ax.set_title(f"{short_label}\nr={r:.2f}", fontsize=7.5)
+        fig1_label = _FIG1_LABELS.get(map_label, map_label)
+        ax.set_title(f"{fig1_label}\nr={r:.2f}", fontsize=7.5)
         ax.tick_params(labelsize=6)
         ax.ticklabel_format(style='scientific', axis='both', scilimits=(0, 0))
         ax.xaxis.get_offset_text().set_fontsize(5)
@@ -455,8 +478,8 @@ for idx, (map_label, h5_name) in enumerate(FIG1_MAPS.items()):
             color = "white" if abs(val) > 0.6 else "black"
             ax.text(j, i, f"{val:.2f}", ha="center", va="center", fontsize=5, color=color)
 
-    short_label = map_label.replace("_gt15", "").replace("_", "\n")
-    ax.set_title(short_label, fontsize=7.5)
+    heatmap_label = _FIG1_LABELS.get(map_label, map_label)
+    ax.set_title(heatmap_label, fontsize=7.5)
 
 plt.colorbar(im, ax=axes[-1], label="r", shrink=0.8)
 fig.suptitle("Per-Map Element Correlation Matrices", fontsize=11)
