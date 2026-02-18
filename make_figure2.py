@@ -1,6 +1,27 @@
 """
-Figure 2: Representative point XANES with LCF fits for each group.
-6-panel figure (2 columns x 3 rows), one panel per group.
+Figure 2: Representative Fe K-edge µ-XANES spectra with LCF fits.
+6-panel figure (2 columns x 3 rows) illustrating the range of Fe speciation.
+LCF uses pre-edge-weighted NNLS (×2, 7108–7118 eV) with 5% minimum component threshold.
+
+Caption:
+    Representative Fe K-edge µ-XANES spectra with linear combination fitting
+    (LCF) results showing the range of Fe speciation observed across 172
+    microprobe point analyses. Black solid lines show measured spectra, red
+    dashed lines show LCF fits, colored lines show individual reference mineral
+    contributions scaled by their fitted weights (with phase group and
+    percentage labeled), and gray lines show fit residuals offset below. LCF
+    used non-negative least squares with pre-edge weighting (×2, 7108–7118 eV)
+    to improve sensitivity to Fe oxidation state, and a 5% minimum component
+    threshold. Spectra were selected to illustrate the dominant Fe phases:
+    (a) Fe(II) phyllosilicate + carbonate + oxyhydroxide;
+    (b) Fe(III) phyllosilicate with Fe(II) silicate;
+    (c) Fe(II) phyllosilicate with Fe sulfide and carbonate;
+    (d) green rust with Fe(II) phosphate;
+    (e) Fe(II) carbonate with Fe sulfide;
+    (f) Fe sulfide with Fe(II) phosphate.
+    Spectral groups (1–5, with group 3 subdivided into 3a and 3b) were
+    identified by k-means clustering of PCA scores; measurement locations are
+    indicated in Figure 1.
 """
 import numpy as np
 import pandas as pd
@@ -8,6 +29,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from scipy.optimize import nnls
+from itertools import combinations
 from sklearn.cluster import KMeans
 import os, glob
 
@@ -23,17 +45,32 @@ PCA_DIR = "pca_results"
 E_MIN, E_MAX, E_STEP = 7100, 7180, 0.2
 E_GRID = np.arange(E_MIN, E_MAX + E_STEP / 2, E_STEP)
 
+# Pre-edge weighting (must match 03_lcf_microprobe.ipynb)
+PRE_EDGE_RANGE = (7108, 7118)  # eV
+PRE_EDGE_WEIGHT = 2.0
+
 # Plot range
 PLOT_E_MIN, PLOT_E_MAX = 7105, 7170
 
 # Map panel spectrum prefixes (spectra visible on the 4 maps in Figure 1)
 MAP_PREFIXES = [
+    "FeXANES_GT5_flaky2_FeXRD_",
+    "FeXANES_GT5_flaky2_Fe_",
+    "FeXANES_GT5_flakysmooth2_Fe_",
+    "FeXANES_GT15_rectangles_Fe_",
     "FeXANES_GT15_FeTiXRD_striated2_",
     "FeXANES_GT15_Fe_striated2_",
-    "FeXANES_GT15_rectangles_Fe_",
-    "FeXANES_GT5_flaky_nodule_Fe",
-    "FeXANES_GT15_flakydark_Fe_",
 ]
+
+# Fixed spectra matching Figure 1 selections (group -> spectrum name)
+SELECTED_SPECTRA = {
+    1:    "FeXANES_GT15_rectangles_Fe_6.001",
+    2:    "FeXANES_GT5_flaky2_FeXRD_12.001",
+    "3a": "FeXANES_GT5_flakysmooth2_Fe_11.001",
+    "3b": "FeXANES_GT5_flaky2_Fe_20.001",
+    4:    "FeXANES_GT15_FeTiXRD_striated2_2.001",
+    5:    "FeXANES_GT5_flakysmooth2_Fe_19.001",
+}
 
 # Reference standard files
 REF_NAMES = [
@@ -106,11 +143,12 @@ COMP_COLORS = [
 
 # Map spectrum-name prefix → Figure 1 panel label
 SPEC_TO_PANEL = [
-    ("FeXANES_GT15_FeTiXRD_striated2_", "(a)"),
-    ("FeXANES_GT15_Fe_striated2_",      "(a)"),
-    ("FeXANES_GT15_rectangles_Fe_",     "(b)"),
-    ("FeXANES_GT5_flaky_nodule_Fe",     "(c)"),
-    ("FeXANES_GT15_flakydark_Fe_",      "(d)"),
+    ("FeXANES_GT5_flaky2_FeXRD_",       "(a)"),
+    ("FeXANES_GT5_flaky2_Fe_",          "(a)"),
+    ("FeXANES_GT5_flakysmooth2_Fe_",    "(b)"),
+    ("FeXANES_GT15_rectangles_Fe_",     "(c)"),
+    ("FeXANES_GT15_FeTiXRD_striated2_", "(d)"),
+    ("FeXANES_GT15_Fe_striated2_",      "(d)"),
 ]
 
 
@@ -189,34 +227,19 @@ df.loc[c3_mask, "group"] = c3_df["group"].values
 
 print(f"Group counts:\n{df['group'].value_counts().sort_index()}")
 
-# ---------- Select representative spectra ----------
-print("\nSelecting representative spectra...")
+# ---------- Use fixed spectra from Figure 1 ----------
+print("\nUsing selected spectra from Figure 1...")
 ref_columns = [c for c in lcf_df.columns if c not in
-               ["spectrum", "cluster", "r_factor", "chi_sq", "weight_sum", "n_refs"]]
+               ["spectrum", "cluster", "r_factor", "r_factor_w", "chi_sq", "weight_sum", "n_refs"]]
 
 selected = {}
 for grp in [1, 2, "3a", "3b", 4, 5]:
-    grp_str = str(grp)
-    grp_df = df[df["group"] == grp_str].copy()
-
-    # Filter to map spectra first
-    map_mask = grp_df["spectrum"].apply(is_map_spectrum)
-    candidates = grp_df[map_mask] if map_mask.any() else grp_df
-
-    # Prefer 3+ component fits
-    multi_comp = candidates[candidates["n_refs"] >= 3]
-    if len(multi_comp) >= 1:
-        candidates = multi_comp
-
-    # Prefer spectra with R-factor <= 0.025 (good fits)
-    good_fits = candidates[candidates["r_factor"] <= 0.025]
-    if len(good_fits) >= 1:
-        candidates = good_fits
-
-    # Pick spectrum closest to median R-factor
-    median_r = candidates["r_factor"].median()
-    idx = (candidates["r_factor"] - median_r).abs().idxmin()
-    row = candidates.loc[idx]
+    spec_name = SELECTED_SPECTRA[grp]
+    row = df[df["spectrum"] == spec_name]
+    if row.empty:
+        print(f"  Group {grp}: {spec_name} NOT FOUND in data")
+        continue
+    row = row.iloc[0]
     selected[grp] = row
     print(f"  Group {grp}: {row['spectrum']} (R={row['r_factor']:.4f}, n_refs={int(row['n_refs'])})")
 
@@ -235,7 +258,7 @@ for name in REF_NAMES:
 print("\nBuilding Figure 2...")
 
 fig, axes = plt.subplots(3, 2, figsize=(TARGET_WIDTH_IN, 8.5), dpi=DPI)
-fig.subplots_adjust(hspace=0.35, wspace=0.25, left=0.08, right=0.97, top=0.97, bottom=0.06)
+fig.subplots_adjust(hspace=0.15, wspace=0.25, left=0.08, right=0.97, top=0.98, bottom=0.06)
 
 group_order = [1, 2, "3a", "3b", 4, 5]
 panel_labels_list = ["(a)", "(b)", "(c)", "(d)", "(e)", "(f)"]
@@ -263,29 +286,59 @@ for idx, grp in enumerate(group_order):
     e_data, mu_data = load_csv_spectrum(spec_fp)
     mu_grid = interp_to_grid(e_data, mu_data)
 
-    # Get the active references and their weights from LCF results
-    active_refs = []
-    for ref_name in ref_columns:
-        w = info[ref_name]
-        if w > 0.005:  # threshold
-            active_refs.append((ref_name, w))
-    active_refs.sort(key=lambda x: x[1], reverse=True)
+    # Full combinatorial weighted NNLS (matches 03_lcf_microprobe.ipynb)
+    b = mu_grid
+    all_ref_names = [rn for rn in REF_NAMES if rn in ref_spectra]
+    ref_mat = np.column_stack([ref_spectra[rn] for rn in all_ref_names])
 
-    # Reconstruct fit from stored weights
-    weight_sum = info["weight_sum"]
-    fit = np.zeros_like(E_GRID)
+    # Build pre-edge weight vector
+    w_vec = np.ones(len(E_GRID))
+    pre_mask = (E_GRID >= PRE_EDGE_RANGE[0]) & (E_GRID <= PRE_EDGE_RANGE[1])
+    w_vec[pre_mask] = PRE_EDGE_WEIGHT
+    b_w = b * w_vec
+
+    MAX_REFS = 3
+    MIN_COMPONENT_FRAC = 0.05  # drop components below 5%
+    best = {"r_factor_w": np.inf}
+    for n_ref in range(1, MAX_REFS + 1):
+        for combo in combinations(range(len(all_ref_names)), n_ref):
+            A = ref_mat[:, list(combo)]
+            A_w = A * w_vec[:, np.newaxis]
+            weights, _ = nnls(A_w, b_w)
+            w_sum = weights.sum()
+            if w_sum == 0:
+                continue
+            # Skip if any component is below the minimum fraction
+            if n_ref > 1 and np.any((weights / w_sum) < MIN_COMPONENT_FRAC):
+                continue
+            fitted = A @ weights
+            residual_tmp = b - fitted
+            residual_w = residual_tmp * w_vec
+            r_factor_w = np.sum(np.abs(residual_w)) / np.sum(np.abs(b_w))
+            if r_factor_w < best["r_factor_w"]:
+                best = {
+                    "combo": combo,
+                    "weights": weights,
+                    "fitted": fitted,
+                    "r_factor_w": r_factor_w,
+                }
+
+    fit = best["fitted"]
+    raw_weights = best["weights"]
+    combo_names = [all_ref_names[i] for i in best["combo"]]
+    weight_sum = raw_weights.sum()
     components = []
-    for ref_name, w in active_refs:
-        if ref_name in ref_spectra:
-            comp = w * ref_spectra[ref_name]
-            fit += comp
-            pct = w / weight_sum * 100 if weight_sum > 0 else 0
-            components.append((ref_name, w, pct, comp))
+    for rn, rw in zip(combo_names, raw_weights):
+        if rw > 1e-6:
+            comp = rw * ref_spectra[rn]
+            pct = rw / weight_sum * 100 if weight_sum > 0 else 0
+            components.append((rn, rw, pct, comp))
+    components.sort(key=lambda x: x[1], reverse=True)
 
     residual = mu_grid - fit
 
-    # R-factor
-    r_factor = info["r_factor"]
+    # Unweighted R-factor (for display)
+    r_factor = np.sum(np.abs(residual)) / np.sum(np.abs(mu_grid))
 
     # Plot range mask
     e_mask = (E_GRID >= PLOT_E_MIN) & (E_GRID <= PLOT_E_MAX)
@@ -311,37 +364,48 @@ for idx, grp in enumerate(group_order):
     ax.plot(e_plot, residual[e_mask] + resid_offset, '-', color='gray', lw=0.7, zorder=2)
     ax.axhline(y=resid_offset, color='gray', lw=0.3, ls=':', zorder=1)
 
-    # Component text annotation using phase group names
-    comp_text_parts = []
+    # Component legend with colored lines
+    comp_lines = []
     for ref_name, w, pct, comp in components:
         pg = phase_label(ref_name)
-        comp_text_parts.append(f"{pg} {pct:.0f}%")
-    comp_text = "\n".join(comp_text_parts)
+        color = PHASE_COLORS.get(pg, COMP_COLORS[0])
+        comp_lines.append(plt.Line2D([0], [0], color=color, lw=1.5,
+                                      label=f"{pg} {pct:.0f}%"))
 
-    # Text annotation with R-factor and components
-    ax.text(0.98, 0.97, f"R = {r_factor:.4f}\n{comp_text}",
-            transform=ax.transAxes, fontsize=5.5, va='top', ha='right',
-            bbox=dict(boxstyle='round,pad=0.3', facecolor='white', alpha=0.85, edgecolor='gray', lw=0.3))
+    # Add data, fit, and residual to legend
+    legend_handles = [
+        plt.Line2D([0], [0], color='k', lw=1.2, label='Data'),
+        plt.Line2D([0], [0], color='r', lw=1.0, ls='--', label='LCF fit'),
+    ] + comp_lines + [
+        plt.Line2D([0], [0], color='gray', lw=0.7, label='Residual'),
+    ]
 
-    # Panel label and title — cross-reference to Figure 1 map panel + point
-    panel_ref = map_panel_label(spec_name)
-    title_str = f"Group {grp}"
-    if panel_ref:
-        title_str += f"  ({panel_ref})"
-    ax.text(0.02, 0.97, f"{panel_labels_list[idx]}",
-            transform=ax.transAxes, fontsize=9, fontweight='bold', va='top', ha='left')
-    ax.set_title(title_str, fontsize=7.5, pad=4)
+    ax.legend(handles=legend_handles, loc='upper right', fontsize=5,
+              frameon=True, fancybox=False, edgecolor='gray',
+              handlelength=1.5, handletextpad=0.4, borderpad=0.3,
+              labelspacing=0.3)
 
-    # Axis formatting
+    # Panel label
+    ax.text(0.02, 0.97, panel_labels_list[idx],
+            transform=ax.transAxes, fontsize=9, fontweight='bold',
+            va='top', ha='left')
+
+    # Axis formatting — despine
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
     if row_idx == 2:
         ax.set_xlabel("Energy (eV)", fontsize=8)
-    else:
-        ax.set_xticklabels([])
     if col_idx == 0:
         ax.set_ylabel("Flattened µ(E)", fontsize=8)
 
-    ax.tick_params(labelsize=7, direction='in', top=True, right=True)
+    ax.tick_params(labelsize=7, direction='in', top=False, right=False)
     ax.set_xlim(PLOT_E_MIN, PLOT_E_MAX)
+    # Extend y-axis upward to make room for legend
+    ymin, ymax = ax.get_ylim()
+    extra = 0.15 * (ymax - ymin)
+    if grp == 4:  # panel (e) needs a bit more room
+        extra += 0.05
+    ax.set_ylim(ymin, ymax + extra)
 
 # Save
 fig.savefig("figure_xanes_lcf.png", dpi=DPI, bbox_inches='tight',

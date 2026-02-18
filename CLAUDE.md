@@ -47,6 +47,27 @@ The original `pca-clustering-2.ipynb` is preserved but superseded by the split n
 - **Cluster 4 is NOT self-absorbed Fe(III)** — confirmed Fe(II) (siderite + mackinawite) by edge energy, pre-edge, and LCF refit
 - 8 spectra in clusters 2 & 5 show mild self-absorption (Fe(III) oxyhydroxides)
 
+## Map Labels (filename stem → display label)
+Use these labels consistently across all figures, notebooks, and scripts. Excludes `_002` rescans and `elongated_particle` (duplicate of striated gt15 2).
+
+| Label | Filename stem | Description |
+|-------|---------------|-------------|
+| Map 1 | `1x1_10um_flaky_dark_gt15_001` | flaky dark gt15 |
+| Map 2 | `1x1_10um_flaky_gray_mix_gt15_001` | flaky gray mix gt15 |
+| Map 3 | `1x1_10um_rectangles_flakes_gt15_2_001` | rectangles flakes gt15 2 |
+| Map 4 | `2x2_10um_concentric_gray_1_001` | concentric gray 1 |
+| Map 5 | `2x2_10um_concentric_gray_3_001` | concentric gray 3 |
+| Map 6 | `2x2_10um_flaky_1_001` | flaky 1 |
+| Map 7 | `2x2_10um_flaky_2_001` | flaky 2 |
+| Map 8 | `2x2_10um_flaky_nodule_001` | flaky nodule |
+| Map 9 | `2x2_10um_flaky_smooth_2_001` | flaky smooth 2 |
+| Map 10 | `2x2_10um_rectangles_gt15_1_001` | rectangles gt15 1 |
+| Map 11 | `2x2_10um_striated_gt15_2_001` | striated gt15 2 |
+| Map 12 | `2x2_10um_super_dark_gt15_4_001` | super dark gt15 4 |
+| Map 13 | `2x2_10um_white_band_001` | white band |
+
+**Excluded:** `2x2_10um_elongated_particle_gt15_1_001` (map11_extra — duplicate of striated gt15 2)
+
 ## Style Notes
 - Publication figures: 180mm width, 300 DPI, save both PNG and PDF
 - Cluster colors: `{1: '#1f77b4', 2: '#ff7f0e', 3: '#2ca02c', 4: '#d62728', 5: '#9467bd'}`
