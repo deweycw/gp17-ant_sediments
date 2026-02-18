@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../xraylarch"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
+}
