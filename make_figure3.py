@@ -88,11 +88,17 @@ phase_cols = [g for g in PHASE_GROUPS.keys() if g in df_grouped.columns]
 top_phases = [p for p in PLOT_ORDER if p in phase_cols]
 other_phases = [c for c in phase_cols if c not in top_phases]
 
+# Phase markers for scatter plot
+PHASE_MARKERS = {
+    "Fe(II) silicate":        "s",
+    "Fe(III) oxyhydroxide":   "D",
+    "Fe(III) phyllosilicate": "o",
+}
+
 # ---------- Build figure ----------
 print("Building figure...")
 stations = sorted(df_grouped["station"].unique())
 n_stations = len(stations)
-bar_height = 0.6
 panel_labels = list(string.ascii_lowercase)
 
 fig, axes = plt.subplots(1, n_stations, figsize=(TARGET_WIDTH_IN, 3.2),
@@ -103,26 +109,24 @@ if n_stations == 1:
 for i, (ax, station) in enumerate(zip(axes, stations)):
     sdf = df_grouped[df_grouped["station"] == station].sort_values("depth_cm")
     depths = sdf["depth_cm"].values
-    y_pos = np.arange(len(depths))
 
-    cumulative = np.zeros(len(depths))
     for col in top_phases:
         values = sdf[col].values * 100
         color = GROUP_COLORS.get(col, "gray")
-        ax.barh(y_pos, values, bar_height, left=cumulative,
-                color=color, label=col if i == 0 else None,
-                edgecolor="white", linewidth=0.4)
-        cumulative += values
+        marker = PHASE_MARKERS.get(col, "o")
+        ax.plot(values, depths, linestyle=':', color=color, linewidth=0.8)
+        ax.scatter(values, depths, marker=marker, color=color,
+                   s=25, zorder=3, label=col if i == 0 else None,
+                   edgecolors="white", linewidths=0.3)
 
     # Other
     other_values = sdf[other_phases].sum(axis=1).values * 100
     if other_values.sum() > 0:
-        ax.barh(y_pos, other_values, bar_height, left=cumulative,
-                color="lightgray", label="Other" if i == 0 else None,
-                edgecolor="white", linewidth=0.4)
+        ax.plot(other_values, depths, linestyle=':', color="gray", linewidth=0.8)
+        ax.scatter(other_values, depths, marker="^", color="lightgray",
+                   s=25, zorder=3, label="Other" if i == 0 else None,
+                   edgecolors="gray", linewidths=0.3)
 
-    ax.set_yticks(y_pos)
-    ax.set_yticklabels([f"{d:.0f}" for d in depths], fontsize=7)
     ax.invert_yaxis()
     ax.set_xlim(0, 105)
     ax.set_xticks([0, 25, 50, 75, 100])
