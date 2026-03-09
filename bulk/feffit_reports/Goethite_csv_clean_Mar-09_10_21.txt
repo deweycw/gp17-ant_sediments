@@ -1,0 +1,219 @@
+# Feffit Report for Goethite.csv_clean fit "Mar-09 10:21"
+=================== FEFFIT RESULTS ====================
+[[Statistics]]
+  n_function_calls     = 192
+  n_variables          = 16
+  n_data_points        = 260
+  n_independent        = 36.0140875
+  chi_square           = 0.41041054
+  reduced chi_square   = 0.02050608
+  r-factor             = 0.02865998
+  Akaike info crit     = -129.145304
+  Bayesian info crit   = -103.802741
+ 
+[[Parameters]]
+  N_Fe302              =  2.0723165 +/- 1.1872554  (init= 1.0000000)
+  N_Fe329              =  1.1041025 +/- 2.4809348  (init= 1.0000000)
+  N_Fe343              =  3.8855943 +/- 3.8880485  (init= 2.0000000)
+  N_O193               =  0.8615416 +/- 3.2650451  (init= 2.0000000)
+  N_O203               =  3.3403456 +/- 3.4224778  (init= 1.0000000)
+  delr_Fe302           =  0.0230004 +/- 0.0196260  (init= 1.0000e-3)
+  delr_Fe329           =  0.0017419 +/- 0.0722127  (init= 1.0000e-3)
+  delr_Fe343           =  0.0108014 +/- 0.0612300  (init= 1.0000e-3)
+  delr_O193            = -0.0083246 +/- 0.0354910  (init= 1.0000e-3)
+  delr_O203            =  8.0061e-4 +/- 0.1114367  (init= 1.0000e-3)
+  e0                   =  4.0444010 +/- 2.6493134  (init= 0.0000000)
+  s02                  =  0.8000000 (fixed)
+  sigma2_Fe302         =  0.0048394 +/- 0.2974321  (init= 0.0050000)
+  sigma2_Fe329         =  0.0022851 +/- 0.0062361  (init= 1.0000e-3)
+  sigma2_Fe343         =  0.0071399 +/- 0.0084915  (init= 0.0093000)
+  sigma2_O193          =  1.9623e-4 +/- 0.0081992  (init= 1.0000e-3)
+  sigma2_O203          =  0.0073946 +/- 0.0113722  (init= 1.0000e-3)
+ 
+[[Correlations]] (unreported correlations are <  0.100)
+  N_O193, sigma2_O193  =  0.994
+  N_O203, sigma2_O203  =  0.994
+  N_O193, delr_O203    =  0.993
+  delr_O203, sigma2_O193 =  0.982
+  delr_Fe329, delr_Fe343 =  0.980
+  N_O193, N_O203       = -0.980
+  N_O193, sigma2_O203  = -0.976
+  N_Fe343, sigma2_Fe343 =  0.971
+  N_O203, delr_O203    = -0.970
+  delr_O203, sigma2_O203 = -0.967
+  N_Fe329, sigma2_Fe329 =  0.964
+  delr_O193, delr_O203 =  0.963
+  delr_Fe329, sigma2_Fe343 = -0.962
+  N_O203, sigma2_O193  = -0.962
+  N_Fe343, delr_Fe329  = -0.959
+  sigma2_O193, sigma2_O203 = -0.953
+  delr_O193, sigma2_O193 =  0.949
+  N_Fe302, sigma2_Fe302 = -0.947
+  N_O193, delr_O193    =  0.946
+  delr_Fe343, sigma2_Fe343 = -0.928
+  N_Fe343, delr_Fe343  = -0.911
+  N_O203, delr_O193    = -0.908
+  delr_O193, sigma2_O203 = -0.885
+  N_Fe329, delr_Fe343  =  0.866
+  delr_Fe343, sigma2_Fe329 =  0.865
+  N_Fe302, delr_Fe302  =  0.858
+  N_Fe329, sigma2_Fe343 = -0.828
+  N_Fe329, delr_Fe329  =  0.826
+  delr_Fe329, sigma2_Fe329 =  0.806
+  delr_Fe302, sigma2_Fe302 = -0.768
+  sigma2_Fe329, sigma2_Fe343 = -0.753
+  N_Fe343, delr_Fe302  =  0.751
+  N_Fe329, N_Fe343     = -0.707
+  N_Fe343, sigma2_Fe302 = -0.698
+  delr_Fe302, sigma2_Fe343 =  0.694
+  N_Fe302, N_Fe343     =  0.675
+  e0, sigma2_O193      = -0.671
+  delr_Fe302, delr_Fe329 = -0.668
+  N_Fe343, sigma2_Fe329 = -0.662
+  N_O193, e0           = -0.656
+  N_O203, e0           =  0.650
+  delr_Fe329, sigma2_Fe302 =  0.643
+  e0, sigma2_O203      =  0.642
+  N_Fe302, delr_Fe329  = -0.586
+  delr_Fe343, sigma2_Fe302 =  0.586
+  delr_O203, e0        = -0.573
+  sigma2_Fe302, sigma2_Fe343 = -0.572
+  N_Fe302, sigma2_Fe343 =  0.549
+  delr_Fe302, delr_Fe343 = -0.540
+  delr_O193, e0        = -0.486
+  N_Fe302, delr_Fe343  = -0.480
+  delr_Fe302, e0       =  0.465
+  delr_Fe302, sigma2_O193 = -0.410
+  N_O193, delr_Fe302   = -0.400
+  N_O203, delr_Fe302   =  0.388
+  delr_Fe302, sigma2_O203 =  0.383
+  delr_Fe302, delr_O203 = -0.366
+  N_Fe329, delr_Fe302  = -0.352
+  delr_Fe302, delr_O193 = -0.338
+  N_Fe329, e0          = -0.332
+  delr_Fe302, sigma2_Fe329 = -0.320
+  sigma2_Fe302, sigma2_Fe329 =  0.319
+  e0, sigma2_Fe343     =  0.275
+  sigma2_Fe343, sigma2_O193 = -0.262
+  N_Fe329, sigma2_O193 =  0.260
+  N_O193, sigma2_Fe343 = -0.251
+  N_Fe329, N_O193      =  0.246
+  N_O203, sigma2_Fe343 =  0.239
+  N_Fe329, sigma2_Fe302 =  0.236
+  N_Fe329, N_O203      = -0.234
+  sigma2_Fe343, sigma2_O203 =  0.233
+  delr_O203, sigma2_Fe343 = -0.232
+  N_Fe329, sigma2_O203 = -0.228
+  delr_O193, sigma2_Fe343 = -0.224
+  N_Fe329, delr_O203   =  0.220
+  N_Fe329, delr_O193   =  0.205
+  e0, sigma2_Fe329     = -0.193
+  N_Fe343, sigma2_O193 = -0.186
+  N_Fe343, N_O193      = -0.177
+  delr_Fe329, sigma2_O193 =  0.175
+  N_Fe343, delr_O193   = -0.173
+  N_Fe343, delr_O203   = -0.169
+  sigma2_Fe329, sigma2_O193 =  0.167
+  N_O193, delr_Fe329   =  0.166
+  delr_Fe329, delr_O193 =  0.165
+  N_Fe343, N_O203      =  0.165
+  N_Fe343, sigma2_O203 =  0.160
+  delr_Fe329, delr_O203 =  0.158
+  N_Fe302, sigma2_Fe329 = -0.155
+  N_O193, sigma2_Fe329 =  0.154
+  N_O203, delr_Fe329   = -0.153
+  delr_Fe329, sigma2_O203 = -0.148
+  N_Fe302, sigma2_O193 = -0.147
+  N_Fe302, delr_O193   = -0.146
+  N_Fe343, e0          =  0.145
+  N_Fe302, N_O193      = -0.143
+  N_O203, sigma2_Fe329 = -0.142
+  N_Fe302, delr_O203   = -0.142
+  delr_O203, sigma2_Fe329 =  0.138
+  sigma2_Fe329, sigma2_O203 = -0.137
+  delr_O193, sigma2_Fe329 =  0.136
+  N_Fe302, N_O203      =  0.136
+  N_Fe302, sigma2_O203 =  0.134
+  delr_Fe329, e0       = -0.133
+  N_Fe302, N_Fe329     = -0.127
+  delr_Fe343, delr_O193 =  0.103
+ 
+[[Dataset]]
+  unique_id            = 'dejtlkkg'
+  fit space            = 'r'
+  r-range              = 1.000, 5.000
+  k-range              = 2.000, 15.750
+  k window, dk         = 'Kaiser-Bessel', 4.000
+  paths used in fit    = ['/Users/christiandewey/.larch/feff/Fe1_K_Nontronite_cif7180/feff0002.dat', '/Users/christiandewey/.larch/feff/Fe2_K_Biotite_cif861/feff0003.dat', '/Users/christiandewey/.larch/feff/Fe1_K_Goethite_cif2226/feff0001.dat', '/Users/christiandewey/.larch/feff/Fe1_K_Goethite_cif2226/feff0007.dat', '/Users/christiandewey/.larch/feff/Fe1_K_Goethite_cif2226/feff0011.dat']
+  k-weight             = 3
+  epsilon_k            = Array(mean=0.0070031, std=0.0231469)
+  epsilon_r            = 2.5888433
+  n_independent        = 36.014
+ 
+[[Paths]]
+ = Path 'Fe_O203' Fe K Edge
+    feffdat file = /Users/christiandewey/.larch/feff/Fe1_K_Nontronite_cif7180/feff0002.dat, from feff run 'Fe1_K_Nontronite_cif7180'
+    geometry  atom      x        y        z      ipot
+              Fe      -0.0000, -0.0000, -0.0000  0 (absorber)
+               O       0.6522, -1.5236, -1.1781  1
+     reff   =  2.0334000
+     degen  =  2.0000000
+     n*s02  =  2.6722765  := 'N_O203 * s02'
+     e0     =  4.0444010  := 'e0'
+     r      =  2.0342006  := 'reff + delr_O203'
+     deltar =  8.0061e-4  := 'delr_O203'
+     sigma2 =  0.0073946  := 'sigma2_O203'
+
+ = Path 'Fe_Fe302' Fe K Edge
+    feffdat file = /Users/christiandewey/.larch/feff/Fe2_K_Biotite_cif861/feff0003.dat, from feff run 'Fe2_K_Biotite_cif861'
+    geometry  atom      x        y        z      ipot
+              Fe      -0.0000, -0.0000, -0.0000  0 (absorber)
+              Fe       2.6190, -1.4241, -0.4666  4
+     reff   =  3.0174000
+     degen  =  1.0000000
+     n*s02  =  1.6578532  := 'N_Fe302 * s02'
+     e0     =  4.0444010  := 'e0'
+     r      =  3.0404004  := 'reff + delr_Fe302'
+     deltar =  0.0230004  := 'delr_Fe302'
+     sigma2 =  0.0048394  := 'sigma2_Fe302'
+
+ = Path 'Fe_O193' Fe K Edge
+    feffdat file = /Users/christiandewey/.larch/feff/Fe1_K_Goethite_cif2226/feff0001.dat, from feff run 'Fe1_K_Goethite_cif2226'
+    geometry  atom      x        y        z      ipot
+              Fe      -0.0000, -0.0000, -0.0000  0 (absorber)
+               O       0.5264,  1.5064, -1.0827  1
+     reff   =  1.9284000
+     degen  =  2.0000000
+     n*s02  =  0.6892333  := 'N_O193 * s02'
+     e0     =  4.0444010  := 'e0'
+     r      =  1.9200754  := 'reff + delr_O193'
+     deltar = -0.0083246  := 'delr_O193'
+     sigma2 =  1.9623e-4  := 'sigma2_O193'
+
+ = Path 'Fe_Fe329' Fe K Edge
+    feffdat file = /Users/christiandewey/.larch/feff/Fe1_K_Goethite_cif2226/feff0007.dat, from feff run 'Fe1_K_Goethite_cif2226'
+    geometry  atom      x        y        z      ipot
+              Fe      -0.0000, -0.0000, -0.0000  0 (absorber)
+              Fe      -2.8927, -1.5064,  0.4452  2
+     reff   =  3.2917000
+     degen  =  2.0000000
+     n*s02  =  0.8832820  := 'N_Fe329 * s02'
+     e0     =  4.0444010  := 'e0'
+     r      =  3.2934419  := 'reff + delr_Fe329'
+     deltar =  0.0017419  := 'delr_Fe329'
+     sigma2 =  0.0022851  := 'sigma2_Fe329'
+
+ = Path 'Fe_Fe343' Fe K Edge
+    feffdat file = /Users/christiandewey/.larch/feff/Fe1_K_Goethite_cif2226/feff0011.dat, from feff run 'Fe1_K_Goethite_cif2226'
+    geometry  atom      x        y        z      ipot
+              Fe      -0.0000, -0.0000, -0.0000  0 (absorber)
+              Fe       2.0640,  1.5064, -2.2900  2
+     reff   =  3.4312000
+     degen  =  4.0000000
+     n*s02  =  3.1084754  := 'N_Fe343 * s02'
+     e0     =  4.0444010  := 'e0'
+     r      =  3.4420014  := 'reff + delr_Fe343'
+     deltar =  0.0108014  := 'delr_Fe343'
+     sigma2 =  0.0071399  := 'sigma2_Fe343'
+
+=======================================================
