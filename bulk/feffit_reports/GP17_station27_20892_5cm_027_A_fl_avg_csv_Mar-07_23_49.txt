@@ -1,58 +1,60 @@
-# Feffit Report for GP17_station27_20892_5cm_027_A_fl_avg.csv fit "Mar-07 23:49"
+# Feffit Report for GP17_station27_20892_5cm_027_A_fl_avg.csv fit "Mar-09 09:44"
 =================== FEFFIT RESULTS ====================
 [[Statistics]]
-  n_function_calls     = 253
+  n_function_calls     = 276
   n_variables          = 10
   n_data_points        = 196
   n_independent        = 25.1597204
-  chi_square           = 12.8138165
-  reduced chi_square   = 0.84525415
-  r-factor             = 0.02355349
-  Akaike info crit     = 3.02422558
-  Bayesian info crit   = 15.2766688
+  chi_square           = 12.8142429
+  reduced chi_square   = 0.84528227
+  r-factor             = 0.02355427
+  Akaike info crit     = 3.02506274
+  Bayesian info crit   = 15.2775059
  
 [[Parameters]]
-  N_Al328              =  1.6346553 +/- 0.8694424  (init= 1.7900000)
-  N_Fe302              =  1.0778487 +/- 1.0294395  (init= 1.0000000)
-  N_O203               =  5.8273951 +/- 0.6401186  (init= 5.4500000)
-  delr_Al328           =  0.0280209 +/- 0.0284452  (init= 0.0310000)
-  delr_Fe302           =  0.0514495 +/- 0.0378121  (init= 0.0560000)
-  delr_O203            = -0.0105739 +/- 0.0076337  (init=-0.0088000)
-  e0                   =  6.4392727 +/- 1.0892842  (init= 6.8000000)
+  N_Al328              =  1.6378706 +/- 0.8846651  (init= 1.7900000)
+  N_Fe302              =  1.0697836 +/- 1.0384658  (init= 1.0000000)
+  N_O203               =  5.8380946 +/- 0.6425966  (init= 5.4500000)
+  delr_Al328           =  0.0280635 +/- 0.0284401  (init= 0.0310000)
+  delr_Fe302           =  0.0512182 +/- 0.0382285  (init= 0.0560000)
+  delr_O203            = -0.0106319 +/- 0.0086684  (init=-0.0088000)
+  e0                   =  6.4267184 +/- 1.2867185  (init= 5.0000000)
   s02                  =  0.7000000 (fixed)
-  sigma2_Al328         =  2.2356e-8 +/- 0.0073558  (init= 0.0000000)
-  sigma2_Fe302         =  0.0048022 +/- 0.0070467  (init= 0.0050000)
-  sigma2_O203          =  0.0097526 +/- 0.0012923  (init= 0.0088000)
+  sigma2_Al328         =  1.4936e-8 +/- 0.0016883  (init= 0.0000000)
+  sigma2_Fe302         =  0.0047557 +/- 0.0071303  (init= 0.0050000)
+  sigma2_O203          =  0.0097744 +/- 0.0012933  (init= 0.0088000)
  
 [[Correlations]] (unreported correlations are <  0.100)
-  N_Fe302, sigma2_Fe302 =  0.960
-  N_Al328, sigma2_Al328 =  0.902
-  N_O203, sigma2_O203  =  0.886
-  delr_Al328, sigma2_Fe302 = -0.877
-  delr_Al328, delr_Fe302 = -0.875
+  N_Fe302, sigma2_Fe302 =  0.957
+  N_Al328, sigma2_Al328 = -0.894
+  N_O203, sigma2_O203  =  0.885
   delr_Fe302, sigma2_Fe302 =  0.867
-  N_Fe302, delr_Fe302  =  0.825
-  delr_O203, e0        =  0.821
-  N_Fe302, delr_Al328  = -0.781
-  delr_Fe302, sigma2_Al328 =  0.669
-  delr_Al328, sigma2_Al328 = -0.602
-  N_Al328, delr_Al328  = -0.456
-  sigma2_Al328, sigma2_Fe302 =  0.433
-  N_Al328, delr_Fe302  =  0.432
-  N_Al328, e0          = -0.325
-  N_Fe302, sigma2_Al328 =  0.315
-  N_Al328, delr_O203   = -0.288
-  N_Al328, sigma2_Fe302 =  0.229
-  N_Fe302, e0          =  0.211
-  delr_Fe302, e0       =  0.199
-  N_O203, e0           = -0.194
-  delr_Al328, e0       =  0.188
-  N_Fe302, delr_O203   =  0.187
-  delr_Fe302, delr_O203 =  0.161
-  delr_Al328, delr_O203 =  0.152
-  e0, sigma2_Al328     = -0.133
-  delr_O203, sigma2_O203 =  0.133
-  delr_O203, sigma2_Al328 = -0.124
+  delr_O203, e0        =  0.864
+  delr_Al328, sigma2_Fe302 = -0.863
+  delr_Al328, delr_Fe302 = -0.847
+  N_Fe302, delr_Fe302  =  0.829
+  N_Fe302, delr_Al328  = -0.752
+  delr_Fe302, sigma2_Al328 = -0.650
+  delr_Al328, sigma2_Al328 =  0.606
+  N_Al328, delr_Al328  = -0.460
+  sigma2_Al328, sigma2_Fe302 = -0.427
+  N_Al328, delr_Fe302  =  0.386
+  N_Al328, e0          = -0.372
+  N_Al328, delr_O203   = -0.341
+  N_Fe302, sigma2_Al328 = -0.302
+  N_Fe302, e0          =  0.264
+  delr_Fe302, e0       =  0.249
+  N_Fe302, delr_O203   =  0.240
+  delr_Fe302, delr_O203 =  0.213
+  delr_Al328, e0       =  0.206
+  N_Al328, sigma2_Fe302 =  0.205
+  N_O203, e0           = -0.203
+  delr_Al328, delr_O203 =  0.177
+  e0, sigma2_Al328     =  0.147
+  delr_O203, sigma2_Al328 =  0.140
+  e0, sigma2_Fe302     =  0.112
+  delr_O203, sigma2_O203 =  0.108
+  delr_O203, sigma2_Fe302 =  0.104
  
 [[Dataset]]
   unique_id            = 'd6gqrcri'
@@ -74,11 +76,11 @@
               Al      -0.3824,  1.5411,  2.8686  2
      reff   =  3.2788000
      degen  =  1.0000000
-     n*s02  =  1.1442587  := 'N_Al328 * s02'
-     e0     =  6.4392727  := 'e0'
-     r      =  3.3068209  := 'reff + delr_Al328'
-     deltar =  0.0280209  := 'delr_Al328'
-     sigma2 =  2.2356e-8  := 'sigma2_Al328'
+     n*s02  =  1.1465094  := 'N_Al328 * s02'
+     e0     =  6.4267184  := 'e0'
+     r      =  3.3068635  := 'reff + delr_Al328'
+     deltar =  0.0280635  := 'delr_Al328'
+     sigma2 =  1.4936e-8  := 'sigma2_Al328'
 
  = Path 'Fe_O203' Fe K Edge
     feffdat file = /Users/christiandewey/.larch/feff/Fe1_K_Nontronite_cif7180/feff0002.dat, from feff run 'Fe1_K_Nontronite_cif7180'
@@ -87,11 +89,11 @@
                O       0.6522, -1.5236, -1.1781  1
      reff   =  2.0334000
      degen  =  2.0000000
-     n*s02  =  4.0791766  := 'N_O203 * s02'
-     e0     =  6.4392727  := 'e0'
-     r      =  2.0228261  := 'reff + delr_O203'
-     deltar = -0.0105739  := 'delr_O203'
-     sigma2 =  0.0097526  := 'sigma2_O203'
+     n*s02  =  4.0866662  := 'N_O203 * s02'
+     e0     =  6.4267184  := 'e0'
+     r      =  2.0227681  := 'reff + delr_O203'
+     deltar = -0.0106319  := 'delr_O203'
+     sigma2 =  0.0097744  := 'sigma2_O203'
 
  = Path 'Fe_Fe302' Fe K Edge
     feffdat file = /Users/christiandewey/.larch/feff/Fe2_K_Biotite_cif861/feff0003.dat, from feff run 'Fe2_K_Biotite_cif861'
@@ -100,10 +102,10 @@
               Fe       2.6190, -1.4241, -0.4666  4
      reff   =  3.0174000
      degen  =  1.0000000
-     n*s02  =  0.7544941  := 'N_Fe302 * s02'
-     e0     =  6.4392727  := 'e0'
-     r      =  3.0688495  := 'reff + delr_Fe302'
-     deltar =  0.0514495  := 'delr_Fe302'
-     sigma2 =  0.0048022  := 'sigma2_Fe302'
+     n*s02  =  0.7488485  := 'N_Fe302 * s02'
+     e0     =  6.4267184  := 'e0'
+     r      =  3.0686182  := 'reff + delr_Fe302'
+     deltar =  0.0512182  := 'delr_Fe302'
+     sigma2 =  0.0047557  := 'sigma2_Fe302'
 
 =======================================================
