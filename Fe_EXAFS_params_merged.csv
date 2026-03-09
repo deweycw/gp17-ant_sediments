@@ -1,0 +1,77 @@
+Mineral Name,Mineral Class,Fe Oxidation State,Fe Site Geometry,Shell Label,Shell Detail,Linkage,R Angstrom,N Coordination,sigma2 Angstrom2,Key Reference
+akaganeite,Oxyhydroxide,Fe(III),octahedral,Fe-Fe,ES,edge-sharing,3.03,2,0.077,Manceau 2011
+akaganeite,Oxyhydroxide,Fe(III),octahedral,Fe-Fe,DCS,double corner-sharing,3.34,0.9,0.077,Manceau 2011
+akaganeite,Oxyhydroxide,Fe(III),octahedral,Fe-Fe,DCS (long,double corner-sharing,3.47,2.2,0.077,Manceau 2011
+akaganeite,Oxyhydroxide,Fe(III),octahedral,Fe-O,short,,1.95,3.3,0.079,Manceau 2011
+akaganeite,Oxyhydroxide,Fe(III),octahedral,Fe-O,long,,2.12,3.3,0.091,Manceau 2011
+feroxyhite,Oxyhydroxide,Fe(III),octahedral,Fe-Fe,FS,face-sharing,2.89,-1,-1,Manceau 2011
+feroxyhite,Oxyhydroxide,Fe(III),octahedral,Fe-Fe,ES,edge-sharing,3.02,3.7,0.125,Manceau 2011
+feroxyhite,Oxyhydroxide,Fe(III),octahedral,Fe-Fe,DCS,double corner-sharing,3.4,-1,0.125,Manceau 2011
+feroxyhite,Oxyhydroxide,Fe(III),octahedral,Fe-O,short,,1.93,2.8,0.064,Manceau 2011
+feroxyhite,Oxyhydroxide,Fe(III),octahedral,Fe-O,long,,2.07,2.8,0.066,Manceau 2011
+ferrihydrite (6-line),Oxyhydroxide,Fe(III),octahedral,Fe-Fe,FS,face-sharing,2.92,1.5,-1,Manceau & Drits 1993
+ferrihydrite (6-line),Oxyhydroxide,Fe(III),octahedral,Fe-Fe,ES,edge-sharing,3.05,2.6,-1,Manceau & Drits 1993
+ferrihydrite (6-line),Oxyhydroxide,Fe(III),octahedral,Fe-Fe,DCS,double corner-sharing,3.44,-1,0.05,Manceau & Drits 1993
+ferrihydrite (6-line),Oxyhydroxide,Fe(III),octahedral,Fe-O,,,1.98,5.1,-1,Manceau (2011) Am. Mineral. 96:521–533 (Fe–O PDF)
+ferrihydrite (6-line),Oxyhydroxide,Fe(III),octahedral,Fe-O,,,2.15,0.9,-1,Manceau (2011) Am. Mineral. 96:521–533 (Fe–O PDF)
+goethite,Oxyhydroxide,Fe(III),octahedral,Fe-Fe,ES,edge-sharing,3.15,-1,-1,Spadini et al. 1994
+goethite,Oxyhydroxide,Fe(III),octahedral,Fe-Fe,DCS,double corner-sharing,3.4,-1,-1,Spadini et al. 1994
+goethite,Oxyhydroxide,Fe(III),octahedral,Fe-Fe,DCS (long,double corner-sharing,3.52,-1,-1,Spadini et al. 1994
+goethite,Oxyhydroxide,Fe(III),octahedral,Fe-O,short,,1.9,-1,-1,Manceau 2009
+goethite,Oxyhydroxide,Fe(III),octahedral,Fe-O,,,2.01,-1,-1,Maillot et al. (2011) Geochim. Cosmochim. Acta (comparison set; 〈Fe–O〉 in Gt)
+goethite,Oxyhydroxide,Fe(III),octahedral,Fe-O,long,,2.1,-1,-1,Manceau 2009
+hematite,Oxyhydroxide,Fe(III),octahedral,Fe-Fe,FS,face-sharing,2.9,-1,-1,Manceau & Drits 1993
+hematite,Oxyhydroxide,Fe(III),octahedral,Fe-Fe,ES,edge-sharing,2.97,-1,-1,Manceau & Drits 1993
+hematite,Oxyhydroxide,Fe(III),octahedral,Fe-Fe,DCS,double corner-sharing,3.39,-1,-1,Manceau & Drits 1993
+hematite,Oxyhydroxide,Fe(III),octahedral,Fe-Fe,SCS,single corner-sharing,3.7,-1,-1,Naveas et al. 2023
+hematite,Oxyhydroxide,Fe(III),octahedral,Fe-O,short,,1.945,3,-1,Naveas et al. 2023
+hematite,Oxyhydroxide,Fe(III),octahedral,Fe-O,long,,2.116,3,-1,Naveas et al. 2023
+maghemite,Oxyhydroxide,Fe(III),mixed,Fe-O,,,1.96,-1,-1,Maillot et al. 2011
+magnetite,Oxyhydroxide,mixed,mixed,Fe-Fe,DCS,double corner-sharing,3.5,-1,-1,Seco et al. 2009
+magnetite,Oxyhydroxide,mixed,mixed,Fe-Fe,SCS,single corner-sharing,3.7,-1,-1,Seco et al. 2009
+schwertmannite,Oxyhydroxide,Fe(III),octahedral,Fe-S,,,3.24,-1,-1,Wang et al. (2015) Environ. Sci. Technol. (S–Fe distance range 3.22–3.26 Å; midpoint used)
+biotite,Phyllosilicate,Fe(III),Not mentioned in source.,Fe-O,,,1.99,5.7,-1,Heald et al. (1994) biotite oxidation series (oxidized site fit)
+biotite,Phyllosilicate,mixed,octahedral,Fe-O,,,2.11,6,-1,Güttler et al. 1989
+hectorite,Phyllosilicate,Fe(III),octahedral,Fe-Fe,ES,edge-sharing,3.03,0.2,-1,Finck et al. 2015
+hectorite,Phyllosilicate,Fe(III),octahedral,Fe-Mg,,,3.03,2.1,-1,Finck et al. 2015
+hectorite,Phyllosilicate,Fe(III),octahedral,Fe-O,,,2,5.1,-1,Finck et al. 2015
+hectorite,Phyllosilicate,Fe(III),octahedral,Fe-O,2nd,,3.48,0.6,-1,Finck et al. 2015
+hectorite,Phyllosilicate,Fe(III),octahedral,Fe-Si,,,3.24,2.1,-1,Finck et al. 2015
+montmorillonite,Phyllosilicate,Fe(III),octahedral,Fe-Al,,,3.04,2.6,-1,Finck et al. 2015
+montmorillonite,Phyllosilicate,Fe(III),octahedral,Fe-Fe,ES,edge-sharing,3.02,0.4,-1,Finck et al. 2015
+montmorillonite,Phyllosilicate,Fe(III),octahedral,Fe-O,,,2.01,5.8,-1,Finck et al. 2015
+montmorillonite,Phyllosilicate,Fe(III),octahedral,Fe-O,2nd,,3.785,5.8,-1,Finck et al. 2015
+montmorillonite,Phyllosilicate,Fe(III),octahedral,Fe-O,3rd,,4.01,4.2,-1,Finck et al. 2015
+montmorillonite,Phyllosilicate,Fe(III),octahedral,Fe-Si,,,3.22,3.4,-1,Finck et al. 2015
+nontronite (Garfield),Phyllosilicate,Fe(III),octahedral,Fe-Al/Mg,,,3.05,0.3,-1,Manceau et al. 2000
+nontronite (Garfield),Phyllosilicate,Fe(III),octahedral,Fe-Fe,ES,edge-sharing,3.05,2.7,-1,Manceau et al. 2000
+nontronite (Garfield),Phyllosilicate,Fe(III),octahedral,Fe-O,,,2.01,6,-1,Manceau et al. 2000
+nontronite (Garfield),Phyllosilicate,Fe(III),octahedral,Fe-Si,,,3.28,-1,-1,Manceau et al. 2000
+"nontronite (NAu-2, native)",Phyllosilicate,Fe(III),octahedral,Fe-Al,,,3.04,0.9,0.001,Qian et al. 2023
+"nontronite (NAu-2, native)",Phyllosilicate,Fe(III),octahedral,Fe-Fe,ES,edge-sharing,3.04,2.1,0.001,Qian et al. 2023
+"nontronite (NAu-2, native)",Phyllosilicate,Fe(III),octahedral,Fe-Fe,2nd,,5.26,4.5,0.0081,Qian et al. 2023
+"nontronite (NAu-2, native)",Phyllosilicate,Fe(III),octahedral,Fe-O,,,2.01,6,0.0042,Qian et al. 2023
+"nontronite (NAu-2, native)",Phyllosilicate,Fe(III),octahedral,Fe-Si,,,3.28,4,0.0029,Qian et al. 2023
+"nontronite (NAu-2, native)",Phyllosilicate,Fe(III),octahedral,Fe-Si,2nd,,4.46,4,0.0039,Qian et al. 2023
+"nontronite (NAu-2, native)",Phyllosilicate,Fe(III),octahedral,Fe-Si,3rd,,5.54,8,0.0091,Qian et al. 2023
+"nontronite (NAu-2, reduced)",Phyllosilicate,Fe(II),octahedral,Fe-Al,,,3.04,0.5,-1,Qian et al. 2023
+"nontronite (NAu-2, reduced)",Phyllosilicate,Fe(II),octahedral,Fe-Fe,ES,edge-sharing,3.04,2.5,-1,Qian et al. 2023
+"nontronite (NAu-2, reduced)",Phyllosilicate,Fe(II),octahedral,Fe-O,,,2.02,6,-1,Qian et al. 2023
+"nontronite (NAu-2, reduced)",Phyllosilicate,Fe(II),octahedral,Fe-Si,,,3.28,4,-1,Qian et al. 2023
+nontronite (NG-1),Phyllosilicate,Fe(III),mixed,Fe-Fe,,,3.065,-1,-1,Finck et al. (2019) (nontronites: Fe–Fe1 distance range 3.06–3.07 Å; midpoint used)
+nontronite (NG-1),Phyllosilicate,Fe(III),mixed,Fe-O,,,1.88,0.6,-1,Finck et al. (2019) (NG-1 split O1 shell)
+nontronite (NG-1),Phyllosilicate,Fe(III),mixed,Fe-O,,,2,5.1,-1,Finck et al. (2019) (NG-1 split O1 shell)
+nontronite (NG-1),Phyllosilicate,Fe(III),mixed,Fe-Si,,,3.255,-1,-1,Finck et al. (2019) (nontronites: Fe–Si1 distance range 3.25–3.26 Å; midpoint used)
+saponite,Phyllosilicate,Fe(III),tetrahedral,Fe-Fe,,,3.245,0.3,-1,Finck et al. (2019) (Fe–Fe1 distance range 3.24–3.25 Å; N_Fe1 ≤ 0.3; midpoint and 0.3 used)
+saponite,Phyllosilicate,Fe(III),tetrahedral,Fe-Mg,,,3.335,-1,-1,Finck et al. (2019) (Fe–Mg1 distance range 3.33–3.34 Å; midpoint used)
+saponite,Phyllosilicate,Fe(III),tetrahedral,Fe-O,,,1.86,3,-1,Finck et al. (2019) (synthetic saponites: ~3 O at 1.86 Å)
+saponite,Phyllosilicate,Fe(III),tetrahedral,Fe-Si,,,3.19,-1,-1,Finck et al. (2019) (Fe–Si1 distance range 3.18–3.20 Å; midpoint used)
+tetra-ferriphlogopite,Phyllosilicate,Fe(III),tetrahedral,Fe-O,,,1.86,-1,-1,Giuli et al. 2001
+tetra-ferriphlogopite,Phyllosilicate,Fe(III),octahedral,Fe-O,,,2.22,-1,-1,Giuli et al. 2001
+tetra-ferriphlogopite,Phyllosilicate,Fe(III),tetrahedral,Fe-Si,,,3.24,-1,-1,Giuli et al. 2001
+aegirine,Silicate,Fe(III),octahedral,Fe-O,,,2.038,-1,-1,Binsted et al. 1986
+fayalite,Silicate,Fe(II),octahedral,Fe-O,,,2.22,6,-1,Jackson et al. 1993
+orthopyroxene (M2 site),Silicate,Fe(II),octahedral,Fe-O,short,,1.975,-1,-1,Closmann et al. 1996
+orthopyroxene (M2 site),Silicate,Fe(II),octahedral,Fe-O,mid,,2.125,-1,-1,Closmann et al. 1996
+orthopyroxene (M2 site),Silicate,Fe(II),octahedral,Fe-O,long,,2.54,-1,-1,Closmann et al. 1996
+staurolite,Silicate,Fe(II),tetrahedral,Fe-O,,,1.98,3.8,0.018,Henderson et al. 1997
