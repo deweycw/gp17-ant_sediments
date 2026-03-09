@@ -1,1 +1,8 @@
+bulk/GP17-ANT_bulk_FeK_XAS.larix filter=lfs diff=lfs merge=lfs -text
+FeK-standards/fluorescence/2026Mar07_1243.larix filter=lfs diff=lfs merge=lfs -text
+FeK-standards/fluorescence/FeK_standards.larix filter=lfs diff=lfs merge=lfs -text
+bulk/2026Mar07_1243.larix filter=lfs diff=lfs merge=lfs -text
+bulk/2026Mar07_2220.larix filter=lfs diff=lfs merge=lfs -text
+bulk/2026Mar07_2303.larix filter=lfs diff=lfs merge=lfs -text
+bulk/2026Mar07_2331.larix filter=lfs diff=lfs merge=lfs -text
 **/*.larix filter=lfs diff=lfs merge=lfs -text
