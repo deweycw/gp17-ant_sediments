@@ -1,0 +1,118 @@
+# Feffit Report for GP17_station5_19119_7cm_018_A_fl.avg.csv fit "Mar-10 12:33"
+=================== FEFFIT RESULTS ====================
+[[Statistics]]
+  n_function_calls     = 141
+  n_variables          = 10
+  n_data_points        = 196
+  n_independent        = 25.1597204
+  chi_square           = 8.32878037
+  reduced chi_square   = 0.54940198
+  r-factor             = 0.02063584
+  Akaike info crit     = -7.81475736
+  Bayesian info crit   = 4.43768581
+ 
+[[Parameters]]
+  N_Mg302              =  1.9099998 +/- 2.1688077  (init= 3.0200000)
+  N_O203               =  6.0638845 +/- 0.5987501  (init= 4.8600000)
+  N_Si328              =  2.9957430 +/- 1.5329926  (init= 6.0000000)
+  delr_Mg302           = -0.0036105 +/- 0.0484387  (init= 0.0060000)
+  delr_O203            = -0.0091664 +/- 0.0077459  (init=-0.0175000)
+  delr_Si328           = -0.0114609 +/- 0.0106743  (init=-0.0163000)
+  e0                   =  6.6455707 +/- 1.2611047  (init= 5.7000000)
+  s02                  =  0.7000000 (fixed)
+  sigma2_Mg302         =  0.0062646 +/- 0.0087493  (init= 0.0050000)
+  sigma2_O203          =  0.0080058 +/- 0.0010736  (init= 0.0093500)
+  sigma2_Si328         =  0.0010000 +/- 8.3655e-5  (init= 0.0050000)
+ 
+[[Correlations]] (unreported correlations are <  0.100)
+  N_Mg302, sigma2_Mg302 =  0.922
+  N_Si328, sigma2_Si328 = -0.914
+  N_Mg302, delr_Mg302  =  0.905
+  N_Si328, delr_Mg302  =  0.889
+  N_O203, sigma2_O203  =  0.884
+  delr_O203, e0        =  0.872
+  N_Mg302, N_Si328     =  0.839
+  delr_Mg302, sigma2_Mg302 =  0.807
+  delr_Si328, e0       =  0.721
+  N_Si328, delr_Si328  = -0.690
+  delr_Mg302, sigma2_Si328 = -0.680
+  delr_Mg302, delr_Si328 = -0.655
+  N_Si328, sigma2_Mg302 =  0.653
+  N_Mg302, sigma2_Si328 = -0.624
+  delr_O203, delr_Si328 =  0.619
+  N_Mg302, delr_Si328  = -0.616
+  delr_Si328, sigma2_Si328 =  0.589
+  delr_Si328, sigma2_Mg302 = -0.458
+  N_Si328, e0          = -0.406
+  e0, sigma2_Mg302     = -0.399
+  delr_Mg302, e0       = -0.390
+  N_Mg302, e0          = -0.364
+  sigma2_Mg302, sigma2_Si328 = -0.359
+  N_Si328, delr_O203   = -0.344
+  delr_O203, sigma2_Mg302 = -0.332
+  delr_Mg302, delr_O203 = -0.330
+  N_Mg302, delr_O203   = -0.299
+  e0, sigma2_Si328     =  0.257
+  N_O203, e0           = -0.232
+  delr_O203, sigma2_Si328 =  0.216
+  N_O203, delr_Si328   = -0.168
+  e0, sigma2_O203      = -0.136
+  N_O203, sigma2_Mg302 =  0.133
+  delr_Si328, sigma2_O203 = -0.118
+  N_Mg302, N_O203      =  0.115
+  sigma2_Mg302, sigma2_O203 =  0.104
+  N_Mg302, sigma2_O203 =  0.101
+ 
+[[Dataset]]
+  unique_id            = 'dsb25b6u'
+  fit space            = 'r'
+  r-range              = 0.900, 3.900
+  k-range              = 0.100, 12.750
+  k window, dk         = 'Kaiser-Bessel', 3.000
+  paths used in fit    = ['/Users/christiandewey/.larch/feff/Fe1_K_Nontronite_cif7180/feff0002.dat', '/Users/christiandewey/.larch/feff/Fe2_K_Biotite_cif861/feff0009.dat', '/Users/christiandewey/.larch/feff/Fe2_K_Biotite_cif861/feff0004.dat']
+  k-weight             = 3
+  epsilon_k            = Array(mean=0.0027735, std=0.0070105)
+  epsilon_r            = 0.4893763
+  n_independent        = 25.160
+ 
+[[Paths]]
+ = Path 'Fe_O203' Fe K Edge
+    feffdat file = /Users/christiandewey/.larch/feff/Fe1_K_Nontronite_cif7180/feff0002.dat, from feff run 'Fe1_K_Nontronite_cif7180'
+    geometry  atom      x        y        z      ipot
+              Fe      -0.0000, -0.0000, -0.0000  0 (absorber)
+               O       0.6522, -1.5236, -1.1781  1
+     reff   =  2.0334000
+     degen  =  2.0000000
+     n*s02  =  4.2447192  := 'N_O203 * s02'
+     e0     =  6.6455707  := 'e0'
+     r      =  2.0242336  := 'reff + delr_O203'
+     deltar = -0.0091664  := 'delr_O203'
+     sigma2 =  0.0080058  := 'sigma2_O203'
+
+ = Path 'Fe_Si328' Fe K Edge
+    feffdat file = /Users/christiandewey/.larch/feff/Fe2_K_Biotite_cif861/feff0009.dat, from feff run 'Fe2_K_Biotite_cif861'
+    geometry  atom      x        y        z      ipot
+              Fe      -0.0000, -0.0000, -0.0000  0 (absorber)
+              Si       0.3824, -1.5411, -2.8686  3
+     reff   =  3.2788000
+     degen  =  2.0000000
+     n*s02  =  2.0970201  := 'N_Si328 * s02'
+     e0     =  6.6455707  := 'e0'
+     r      =  3.2673391  := 'reff + delr_Si328'
+     deltar = -0.0114609  := 'delr_Si328'
+     sigma2 =  0.0010000  := 'sigma2_Si328'
+
+ = Path 'Fe_Mg302' Fe K Edge
+    feffdat file = /Users/christiandewey/.larch/feff/Fe2_K_Biotite_cif861/feff0004.dat, from feff run 'Fe2_K_Biotite_cif861'
+    geometry  atom      x        y        z      ipot
+              Fe      -0.0000, -0.0000, -0.0000  0 (absorber)
+              Mg      -2.6190, -1.4241,  0.4666  5
+     reff   =  3.0174000
+     degen  =  2.0000000
+     n*s02  =  1.3369999  := 'N_Mg302 * s02'
+     e0     =  6.6455707  := 'e0'
+     r      =  3.0137895  := 'reff + delr_Mg302'
+     deltar = -0.0036105  := 'delr_Mg302'
+     sigma2 =  0.0062646  := 'sigma2_Mg302'
+
+=======================================================
