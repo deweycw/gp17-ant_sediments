@@ -1,0 +1,85 @@
+# Feffit Report for Hornblende fit "Mar-11 15:05"
+=================== FEFFIT RESULTS ====================
+[[Statistics]]
+  n_function_calls     = 80
+  n_variables          = 12
+  n_data_points        = 138
+  n_independent        = 19.8550861
+  chi_square           = 0.14219539
+  reduced chi_square   = 0.01810233
+  r-factor             = 0.02367088
+  Akaike info crit     = -74.0645357
+  Bayesian info crit   = -62.2030132
+ 
+[[Parameters]]
+  N_O211               =  4.1309143 +/- 0.4079145  (init= 1.0000000)
+  delr_O211            = -0.0585287 +/- 0.0092284  (init= 1.0000e-3)
+  e0                   = -0.5218082 +/- 1.2688670  (init= 1.0000e-3)
+  s02                  =  0.9000000 (fixed)
+  sigma2_O211          =  0.0076811 +/- 0.0010346  (init= 1.0000e-3)
+  bkg00_dhnta5kt       =  0.0252709 +/- 0.0254869  (init= 0.0000000)
+  bkg01_dhnta5kt       = -0.0101012 +/- 0.0087909  (init= 0.0000000)
+  bkg02_dhnta5kt       =  0.0030156 +/- 0.0030387  (init= 0.0000000)
+  bkg03_dhnta5kt       = -8.2524e-4 +/- 0.0010872  (init= 0.0000000)
+  bkg04_dhnta5kt       =  3.7821e-4 +/- 7.0479e-4  (init= 0.0000000)
+  bkg05_dhnta5kt       = -3.2013e-4 +/- 8.8629e-4  (init= 0.0000000)
+  bkg06_dhnta5kt       =  2.3968e-4 +/- 9.8997e-4  (init= 0.0000000)
+  bkg07_dhnta5kt       = -4.7961e-5 +/- 8.4853e-4  (init= 0.0000000)
+ 
+[[Correlations]] (unreported correlations are <  0.100)
+  delr_O211, e0        =  0.845
+  N_O211, sigma2_O211  =  0.813
+  bkg04_dhnta5kt, bkg05_dhnta5kt = -0.766
+  bkg05_dhnta5kt, bkg06_dhnta5kt = -0.760
+  bkg02_dhnta5kt, bkg03_dhnta5kt = -0.718
+  bkg01_dhnta5kt, bkg02_dhnta5kt = -0.710
+  bkg03_dhnta5kt, bkg04_dhnta5kt = -0.654
+  bkg00_dhnta5kt, bkg01_dhnta5kt = -0.575
+  bkg06_dhnta5kt, bkg07_dhnta5kt = -0.560
+  bkg04_dhnta5kt, bkg06_dhnta5kt =  0.499
+  bkg03_dhnta5kt, bkg05_dhnta5kt =  0.467
+  bkg01_dhnta5kt, bkg03_dhnta5kt =  0.440
+  bkg02_dhnta5kt, bkg04_dhnta5kt =  0.432
+  bkg00_dhnta5kt, bkg02_dhnta5kt =  0.345
+  bkg05_dhnta5kt, bkg07_dhnta5kt =  0.344
+  bkg02_dhnta5kt, bkg05_dhnta5kt = -0.295
+  bkg03_dhnta5kt, bkg06_dhnta5kt = -0.287
+  bkg01_dhnta5kt, bkg04_dhnta5kt = -0.250
+  bkg04_dhnta5kt, bkg07_dhnta5kt = -0.199
+  N_O211, e0           = -0.196
+  bkg00_dhnta5kt, bkg03_dhnta5kt = -0.189
+  bkg02_dhnta5kt, bkg06_dhnta5kt =  0.186
+  bkg01_dhnta5kt, bkg05_dhnta5kt =  0.174
+  bkg03_dhnta5kt, bkg07_dhnta5kt =  0.122
+  bkg00_dhnta5kt, bkg04_dhnta5kt =  0.119
+  bkg01_dhnta5kt, bkg06_dhnta5kt = -0.106
+  delr_O211, sigma2_O211 =  0.103
+ 
+[[Dataset]]
+  unique_id            = 'dhnta5kt'
+  fit space            = 'r'
+  r_bkg (refine bkg)   = 0.797
+  r-range              = 0.031, 2.154
+  k-range              = 2.000, 15.750
+  k window, dk         = 'Kaiser-Bessel', 4.000
+  paths used in fit    = ['/Users/christiandewey/.larch/feff/Fe1_K_Hematite_cif17806/feff0002.dat']
+  k-weight             = 2
+  epsilon_k            = Array(mean=0.0164564, std=0.0540873)
+  epsilon_r            = 0.4570077
+  n_independent        = 19.855
+ 
+[[Paths]]
+ = Path 'Fe_O211' Fe K Edge
+    feffdat file = /Users/christiandewey/.larch/feff/Fe1_K_Hematite_cif17806/feff0002.dat, from feff run 'Fe1_K_Hematite_cif17806'
+    geometry  atom      x        y        z      ipot
+              Fe      -0.0000, -0.0000, -0.0000  0 (absorber)
+               O       0.7706,  1.3346, -1.4465  1
+     reff   =  2.1136000
+     degen  =  3.0000000
+     n*s02  =  3.7178228  := 'N_O211 * s02'
+     e0     = -0.5218082  := 'e0'
+     r      =  2.0550713  := 'reff + delr_O211'
+     deltar = -0.0585287  := 'delr_O211'
+     sigma2 =  0.0076811  := 'sigma2_O211'
+
+=======================================================
