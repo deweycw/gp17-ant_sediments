@@ -9,7 +9,7 @@ Fe and Ti concentrations varied modestly across stations, whereas Ca showed larg
 C and N concentrations showed distinct depth structure at each station (Figure 2). At Station 5, C was elevated at 1 and 3 cm (2.45 and 2.87 wt%) but decreased sharply to 0.58 wt% at 5 cm and <0.24 wt% below. C decreased more gradually at Station 15 (1.17 wt% at 1 cm to ~0.9-1.0 wt% below) and at Station 27 (0.56 wt% at 3 cm to 0.27 wt% at 15 cm). N was uniformly low at Stations 27 and 5 (0.02-0.08 and 0.02-0.04 wt%, respectively) but at Station 15, N increased sharply below 7 cm, from 0.11-0.17 wt% in the upper core to 0.44-0.60 wt% at 9-15 cm. S was broadly similar across all cores (0.18-0.54 wt%), decreasing slightly with depth.
 
 ### Grain-level Fe mineralogy 
-![[figure_xfm_maps.png]]
+![[figure_xfm_CaFeK_TiFeK.png]]
 **Figure 3**. Tricolor µ-XRF element maps of representative sediment grains from GP17-ANT stations. Red = Fe Kα, green = K Kα, blue = Ca Kα. White circles indicate locations of µ-XANES point measurements shown in Figure 4, labeled by corresponding Figure 4 panel. (a) Map 7: mixed Fe-bearing particles with scattered detrital grains; (b) Map 9: Fe-rich grain with surrounding matrix; (c) Map 10: large Fe-rich aggregate with K-bearing rim and Ca-rich region; (d) Map 11: Ca-rich concentric grain adjacent to Fe–K-bearing striated particle. Scale bars = 0.5 mm.
 
 - [ ] K throughout maps -- phyllosilicate matrix (K as inner layer cation) 
@@ -18,8 +18,8 @@ C and N concentrations showed distinct depth structure at each station (Figure 2
 
 
 
-![[figure_xanes_lcf.png]]
-Figure 4. Representative Fe K-edge µ-XANES spectra with linear combination fitting (LCF) results showing the range of Fe speciation observed across 172 microprobe point analyses. Black solid lines show measured spectra, red dashed lines show LCF fits, colored lines show individual reference mineral contributions scaled by their fitted weights (with phase group and percentage labeled), and gray lines show fit residuals offset below. LCF used non-negative least squares with pre-edge weighting (×2, 7108–7118 eV) to improve sensitivity to Fe oxidation state, and a 5% minimum component threshold. Spectra were selected to illustrate the dominant Fe phases: (a) Fe(II) phyllosilicate + Fe (II) carbonate + Fe(III) oxyhydroxide; (b) Fe(III) phyllosilicate with Fe(II) silicate; (c) Fe(II) phyllosilicate with Fe (II) sulfide and carbonate; (d) green rust with Fe(II) phosphate; (e) Fe(II) carbonate with Fe sulfide; (f) Fe sulfide with Fe(II) phosphate. Spectral groups (1–5, with group 3 subdivided into 3a and 3b) were identified by k-means clustering of PCA scores; measurement locations are indicated in Figure 1.
+![[figure4_xanes_lcf.png]]
+**Figure 4.** Representative Fe K-edge µ-XANES spectra with linear combination fitting (LCF) results showing the range of Fe speciation observed across 172 microprobe point analyses. Black solid lines show measured spectra, red dashed lines show LCF fits, colored lines show individual reference mineral contributions scaled by their fitted weights (with phase group and percentage labeled), and gray lines show fit residuals offset below. LCF used non-negative least squares with pre-edge weighting (×2, 7108–7118 eV) to improve sensitivity to Fe oxidation state, and a 5% minimum component threshold. Spectra were selected to illustrate the dominant Fe phases: (a) Fe(II) phyllosilicate + Fe (II) carbonate + Fe(III) oxyhydroxide; (b) Fe(III) phyllosilicate with Fe(II) silicate; (c) Fe(II) phyllosilicate with Fe (II) sulfide and carbonate; (d) green rust with Fe(II) phosphate; (e) Fe(II) carbonate with Fe sulfide; (f) Fe sulfide with Fe(II) phosphate. Spectral groups (1–5, with group 3 subdivided into 3a and 3b) were identified by k-means clustering of PCA scores; measurement locations are indicated in Figure 1.
 
 
 ### Bulk Fe mineralogy 
