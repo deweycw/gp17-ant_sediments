@@ -10,22 +10,32 @@ C and N concentrations showed distinct depth structure at each station (Figure 2
 
 ### Grain-level Fe mineralogy 
 ![[figure_xfm_CaFeK_TiFeK.png]]
-**Figure 3**. Tricolor µ-XRF element maps of representative sediment grains from GP17-ANT stations. Red = Fe Kα, green = K Kα, blue = Ca Kα. White circles indicate locations of µ-XANES point measurements shown in Figure 4, labeled by corresponding Figure 4 panel. (a) Map 7: mixed Fe-bearing particles with scattered detrital grains; (b) Map 9: Fe-rich grain with surrounding matrix; (c) Map 10: large Fe-rich aggregate with K-bearing rim and Ca-rich region; (d) Map 11: Ca-rich concentric grain adjacent to Fe–K-bearing striated particle. Scale bars = 0.5 mm.
+**Figure 3**. Tricolor µ-XRF element maps
 
 - [ ] K throughout maps -- phyllosilicate matrix (K as inner layer cation) 
 - [ ] interspersed large (~1 mm$^2$) detrital, lithogenic grains with Fe (Fe(II)-silicates, including pyroxenes and amphiboles; Fe(II) phyllosilicates, including biotite; and Fe-Ti oxides)
-- [ ] abundant small (5-10 micron) Fe-containing particles that appear to be authigenic phases (Fe(II) carbonates and sulfates, Fe(III) phyllosilicates (nontronite, ferrosmectite), Fe phosphates and sulfates, Fe oxides 
+- [ ] abundant small (5-10 micron) Fe-containing particles that appear to be authigenic phases (Fe(II) carbonates and sulfates, Fe(III) phyllosilicates (nontronite, ferrosmectite), Fe phosphates and sulfates
 
 
 
 ![[figure4_xanes_lcf.png]]
-**Figure 4.** Representative Fe K-edge µ-XANES spectra with linear combination fitting (LCF) results showing the range of Fe speciation observed across 172 microprobe point analyses. Black solid lines show measured spectra, red dashed lines show LCF fits, colored lines show individual reference mineral contributions scaled by their fitted weights (with phase group and percentage labeled), and gray lines show fit residuals offset below. LCF used non-negative least squares with pre-edge weighting (×2, 7108–7118 eV) to improve sensitivity to Fe oxidation state, and a 5% minimum component threshold. Spectra were selected to illustrate the dominant Fe phases: (a) Fe(II) phyllosilicate + Fe (II) carbonate + Fe(III) oxyhydroxide; (b) Fe(III) phyllosilicate with Fe(II) silicate; (c) Fe(II) phyllosilicate with Fe (II) sulfide and carbonate; (d) green rust with Fe(II) phosphate; (e) Fe(II) carbonate with Fe sulfide; (f) Fe sulfide with Fe(II) phosphate. Spectral groups (1–5, with group 3 subdivided into 3a and 3b) were identified by k-means clustering of PCA scores; measurement locations are indicated in Figure 1.
+**Figure 4.** Representative Fe K-edge µ-XANES spectra with linear combination fitting (LCF) results showing the range of Fe speciation observed across 172 microprobe point analyses. Black solid lines show measured spectra, red dashed lines show LCF fits, colored lines show individual reference mineral contributions scaled by their fitted weights (with phase group and percentage labeled), and gray lines show fit residuals offset below. LCF used non-negative least squares and a 5% minimum component threshold. 
+
+![[figure_xfm_map1_3combo.png]]
+**Figure 5.** Tricolor µ-XRF maps of a representative Fe-rich grain aggregate (Map 1) rendered with three element combinations to highlight distinct mineral associations. (a) Fe Kα (red), Al Kα (green), K Kα (blue): Fe-rich particles appear red against a K- and Al-bearing phyllosilicate matrix. (b) Mn Kα (red), Al Kα (green), K Kα (blue): Mn-rich zones (red-magenta) within the Fe-bearing aggregate indicate Mn co-association with specific Fe phases. (c) Ca Kα (red), Al Kα (green), K Kα (blue): Ca-rich regions (red) mark carbonate or Ca-bearing phases distinct from the aluminosilicate matrix. White circles labeled 6a and 6b indicate µ-XANES measurement locations corresponding to Figure 6 panels. Scale bars = 0.2 mm.
+
+- [ ] evidence for authigenic Fe(II/III)-Mn-aluminosilicates
+- [ ] notable lack of evidence of Fe(III)-oxyhydroxides
 
 
+![[figure6_xanes_lcf.png]]
+**Figure 6.** Fe K-edge µ-XANES spectra and LCF results for two measurement locations within the Map 1 grain aggregate (positions marked in Figure 5). Black solid lines show measured spectra, red dashed lines show LCF fits, colored lines show individual reference mineral contributions scaled by fitted weight, and gray lines show fit residuals. (a) Spectrum 6a: dominated by Fe(II) phyllosilicate (biotite, 63%) with Fe sulfide (mackinawite, 37%). (b) Spectrum 6b: Fe(II) phyllosilicate (biotite, 47%) with Fe(II) carbonate (siderite, 44%) and minor Fe sulfide (mackinawite, 9%).
 ### Bulk Fe mineralogy 
 ![[figure_exafs_distances.png]]
-Figure 5. Distributions of Fe K-edge EXAFS interatomic distances from published mineral reference data and GP17-ANT bulk sediment fits. (a) First-shell Fe–O distances grouped by mineral class. (b) Second-shell Fe–M (M = Fe, Mg, Si) distances grouped by scattering pair type within each mineral class. Literature values are shown as beeswarm plots with vertical range lines; GP17-ANT bulk EXAFS fit results (n = 21) are shown as box-and-whisker plots. Marker fill indicates Fe oxidation state: filled = Fe(III), open = Fe(II). Paired filled and open symbols denote minerals with mixed-valence Fe.
+**Figure 7.** Distributions of Fe K-edge EXAFS interatomic distances from published mineral reference data and GP17-ANT bulk sediment fits. (a) First-shell Fe–O distances grouped by mineral class. (b) Second-shell Fe–M (M = Fe, Mg, Si) distances grouped by scattering pair type within each mineral class. Literature values are shown as beeswarm plots with vertical range lines; GP17-ANT bulk EXAFS fit results (n = 21) are shown as box-and-whisker plots. Marker fill indicates Fe oxidation state: filled = Fe(III), open = Fe(II). Paired filled and open symbols denote minerals with mixed-valence Fe.
 
+![[mossbauer.png]]
+**Figure 8.** $^{57}$Fe Mössbauer spectra of Station 27 sediments. Gray circles show measured data; colored curves show fitted components. (a) Room-temperature (295 K) spectra at 1, 5, and 15 cm depth, fit with Fe(III) doublet (pink), Fe(II) doublet (green), and a magnetic sextet (orange) at 1 cm. (b) Temperature series for the 1 cm sample at 295, 77, and 4.2 K, showing progressive resolution of magnetically ordered phases with decreasing temperature. At 4.2 K, the spectrum resolves into Fe(III) in clays (pink), Fe(II) in clays (green), a collapsed magnetic phase (orange), and Fe(III) oxyhydroxides + maghemite (teal).
 
 ![[bulk_depth_profiles_grouped.png]]
-Figure 6. Depth profiles of Fe phase proportions in bulk sediment determined by linear combination fitting (LCF) of Fe K-edge EXAFS spectra. Symbols show the fractional contribution of each geochemical phase class at seven depths (1, 3, 5, 7, 9, 11, and 15 cm) below the sediment-water interface for (a) Station 15, (b) Station 27, and (c) Station 5. 
+**Figure 9.** Depth profiles of Fe phase proportions in bulk sediment determined by linear combination fitting (LCF) of Fe K-edge EXAFS spectra. Symbols show the fractional contribution of each geochemical phase class at seven depths (1, 3, 5, 7, 9, 11, and 15 cm) below the sediment-water interface for (a) Station 15, (b) Station 27, and (c) Station 5. 
